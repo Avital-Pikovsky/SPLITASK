@@ -1,7 +1,7 @@
-plugins {
-    id 'com.android.application'
+
+    apply plugin: 'com.android.application'
     apply plugin: 'com.google.gms.google-services'
-}
+
 
 android {
     compileSdkVersion 30
@@ -45,6 +45,8 @@ dependencies {
 
     // Declare the dependency for the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+
 
 }
 
