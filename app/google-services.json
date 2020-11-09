@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "830819599196",
+    "firebase_url": "https://duckluck-3f29d.firebaseio.com",
+    "project_id": "duckluck-3f29d",
+    "storage_bucket": "duckluck-3f29d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830819599196:android:6a8a9387b675c7497bb799",
+        "android_client_info": {
+          "package_name": "com.example.duckluck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830819599196-q67ffj5kjvps05eq9ogm07hapds0cuab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFAS_YFso32-F0Wu_vdfn4SxkmL23Bnuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830819599196-q67ffj5kjvps05eq9ogm07hapds0cuab.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
