@@ -40,16 +40,17 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //to not login again
-        if (user != null) {
-            finish();
-            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-        }
+//        if (user != null) {
+//            finish();
+//            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+//        }
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn(userEmail.getText().toString(),userPassword.getText().toString());
 
+                
                 startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
 
             }
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         userSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
+                startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
             }
         });
         forgotPassword.setOnClickListener(new View.OnClickListener() {

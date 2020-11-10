@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".LoggedInProfile">
 
+    <TextView
+        android:id="@+id/myPro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotationX="-6"
+        android:text="My Profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.248" />
+
+    <TextView
+        android:id="@+id/myHist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My History"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="244dp" />
+
+    <TextView
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play"
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="330dp" />
+
+    <TextView
+        android:id="@+id/contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Us"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="394dp" />
+
+    <TextView
+        android:id="@+id/singO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sing Out"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="624dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
