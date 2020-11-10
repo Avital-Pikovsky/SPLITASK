@@ -40,15 +40,18 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //to not login again
-        if(user != null){
+        if (user != null) {
             finish();
-            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
         }
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate(userEmail.getText().toString(),userPassword.getText().toString());
+                signIn(userEmail.getText().toString(),userPassword.getText().toString());
+
+                startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+
             }
         });
         userSignUp.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //forgot password
+                startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+
             }
         });
 
@@ -77,13 +82,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private void validate(String userEmail, String userPassword){
+    private void signIn(String userEmail, String userPassword){
 
-        firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
                     Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
 
                 }
