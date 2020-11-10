@@ -1,5 +1,6 @@
 package com.example.duckluck;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+
 public class RegistrationActivity extends AppCompatActivity {
 
     private EditText userName,userEmail, userPassword;
@@ -18,7 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView userLogin;
     private Switch management;
 
-//    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
 
 
 
@@ -28,17 +36,29 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         setupUIViews();
 
-//        firebaseAuth = FirebaseAuth.getInstance();
+       firebaseAuth = FirebaseAuth.getInstance();
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
+                if(validate()) {
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
-                    Boolean user_managment = management.isChecked();
+//                    Boolean user_managment = management.isChecked();
 
-//                    firebaseAuth.createUser
+                    firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+
+                            }
+                            else{
+                                Toast.makeText(RegistrationActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -67,7 +87,7 @@ public class RegistrationActivity extends AppCompatActivity {
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
 
-        if(name.isEmpty() && name.isEmpty() && email.isEmpty() && password.isEmpty()){
+        if(name.isEmpty() || email.isEmpty() || password.isEmpty()){
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }
         else{

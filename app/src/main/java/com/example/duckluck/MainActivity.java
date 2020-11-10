@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         boolean checked = check.isChecked();
 
 
-        if(email.isEmpty() && password.isEmpty() && !checked){
+        if(email.isEmpty() || password.isEmpty() || !checked){
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }
         else{
