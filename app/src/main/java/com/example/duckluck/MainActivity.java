@@ -1,5 +1,6 @@
 package com.example.duckluck;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
     private EditText userEmail, userPassword;
     private Button signInButton;
@@ -19,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox check;
     private Switch managementUser;
 
-
+    private FirebaseAuth firebaseAuth;
 
 
 
@@ -29,19 +36,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setupUI();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        //to not login again
+        if(user != null){
+            finish();
+            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+        }
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validation()){
-                    //check if register and go to main profile
-                }
+                validate(userEmail.getText().toString(),userPassword.getText().toString());
             }
         });
         userSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
-
+                finish ();
             }
         });
         forgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -64,20 +78,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private Boolean validation(){
-        Boolean result = false;
+    private void validate(String userEmail, String userPassword){
 
-        String email = userEmail.getText().toString();
-        String password = userPassword.getText().toString();
-        boolean checked = check.isChecked();
+        firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
 
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
+                }
 
-        if(email.isEmpty() || password.isEmpty() || !checked){
-            Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            result = true;
-        }
-        return result;
+            }
+        });
     }
 }
