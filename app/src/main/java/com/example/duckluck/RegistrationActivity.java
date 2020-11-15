@@ -24,7 +24,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText userName,userEmail, userPassword;
     private Button regButton;
     private TextView userLogin;
-    private Switch management;
 
     private FirebaseAuth firebaseAuth;
 
@@ -78,7 +77,6 @@ public class RegistrationActivity extends AppCompatActivity {
         userPassword = (EditText) findViewById(R.id.etUserPassword);
         regButton = (Button) findViewById(R.id.btnRegister);
         userLogin = (TextView) findViewById(R.id.tvUserLogin);
-        management = (Switch) findViewById(R.id.check);
     }
     private Boolean validate(){
         Boolean result = false;

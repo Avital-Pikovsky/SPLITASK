@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private Button signInButton;
     private TextView userSignUp, forgotPassword;
     private CheckBox check;
-    private Switch managementUser;
 
     private FirebaseAuth firebaseAuth;
 
@@ -79,8 +78,6 @@ public class MainActivity extends AppCompatActivity {
         userSignUp = (TextView) findViewById(R.id.register);
         forgotPassword = (TextView) findViewById(R.id.ForgotPass);
         check = (CheckBox) findViewById(R.id.checkBox);
-        managementUser = (Switch) findViewById(R.id.mangement);
-
 
     }
     private void signIn(String userEmail, String userPassword){
