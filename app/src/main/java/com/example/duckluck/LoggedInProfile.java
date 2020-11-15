@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class LoggedInProfile extends AppCompatActivity {
 
-    private TextView myProfile, myHistory, play, contactUs, singOut;
+    private TextView myProfile, myHistory, contactUs, singOut;
 
 
     @Override
@@ -38,19 +38,18 @@ public class LoggedInProfile extends AppCompatActivity {
             }
         });
 
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(LoggedInProfile.this, play.class));
-            }
-        });
-
         contactUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 startActivity(new Intent(LoggedInProfile.this, contactUs.class));
+            }
+        });
+        singOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(LoggedInProfile.this, MainActivity.class));
             }
         });
 
@@ -59,7 +58,6 @@ public class LoggedInProfile extends AppCompatActivity {
     private void setupUI(){
         myProfile = (TextView) findViewById(R.id.myPro);
         myHistory = (TextView) findViewById(R.id.myHist);
-        play = (TextView) findViewById(R.id.play);
         contactUs = (TextView) findViewById(R.id.contact);
         singOut = (TextView) findViewById(R.id.singO);
     }

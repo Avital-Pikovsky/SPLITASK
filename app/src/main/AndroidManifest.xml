@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuckLuck">
         <activity android:name=".contactUs"></activity>
-        <activity android:name=".play" />
         <activity android:name=".myHistory" />
         <activity android:name=".myProfile" />
         <activity android:name=".LoggedInProfile" />
