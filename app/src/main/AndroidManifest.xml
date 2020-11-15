@@ -13,8 +13,7 @@
         <activity android:name=".myHistory" />
         <activity android:name=".myProfile" />
         <activity android:name=".LoggedInProfile" />
-        <activity android:name=".Profile" />
-        <activity android:name=".RegistrationActiviy" />
+        <activity android:name=".RegistrationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
