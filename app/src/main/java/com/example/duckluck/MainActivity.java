@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //to not login again
-        if (user != null) {
-            finish();
-            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-        }
+//        if (user != null) {
+//            finish();
+//            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+//        }
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,9 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
     private void setupUI(){
         userEmail = (EditText) findViewById(R.id.mainUserEmail);
         userPassword = (EditText) findViewById(R.id.mainUserPassword);
