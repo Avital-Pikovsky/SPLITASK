@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn(userEmail.getText().toString(),userPassword.getText().toString());
-
-                
                 startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
 
             }
@@ -57,13 +55,14 @@ public class MainActivity extends AppCompatActivity {
         userSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+                startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
             }
         });
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //forgot password
+                Toast.makeText(MainActivity.this, "NOT WORKING YET", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
 
             }
@@ -88,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
                     Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
-
                 }
                 else{
                     Toast.makeText(MainActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
