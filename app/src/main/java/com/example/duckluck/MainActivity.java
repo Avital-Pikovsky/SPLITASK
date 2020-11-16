@@ -75,19 +75,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void signIn(String userEmail, String userPassword){
+        if(userEmail.isEmpty() || userPassword.isEmpty()){
+            Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-        firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-                    Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(MainActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
-                }
+                    if (task.isSuccessful()) {
+                        startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+                        Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
+                    }
 
-            }
-        });
+                }
+            });
+        }
     }
 }
