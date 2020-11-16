@@ -5,15 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 
 public class LoggedInProfile extends AppCompatActivity {
 
-    private TextView myProfile, myHistory, contactUs, singOut;
+    private TextView myProfile, myHistory, lists, contactUs, singOut;
 
 
     @Override
@@ -53,11 +49,18 @@ public class LoggedInProfile extends AppCompatActivity {
             }
         });
 
+        lists.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoggedInProfile.this, listActivity.class));
+            }
+        });
 
         }
     private void setupUI(){
         myProfile = (TextView) findViewById(R.id.myPro);
-        myHistory = (TextView) findViewById(R.id.myHist);
+        myHistory = (TextView) findViewById(R.id.myLists);
+        lists = (TextView) findViewById(R.id.friendsLists);
         contactUs = (TextView) findViewById(R.id.contact);
         singOut = (TextView) findViewById(R.id.singO);
     }
