@@ -87,16 +87,16 @@ public class RegistrationActivity extends AppCompatActivity {
         if(name.isEmpty() || email.isEmpty() || password.isEmpty()){
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }
-        if(!name.matches("^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}")) {
+        else if(!name.matches("^[a-zA-Z]+\\s[a-zA-Z\\s]+$")) {
             Toast.makeText(this, "Please enter your full name", Toast.LENGTH_SHORT).show();
         }
-        if(!email.matches("^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$")){
+        else if(!email.matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")){
             Toast.makeText(this, "Please enter valid Email", Toast.LENGTH_SHORT).show();
         }
-        if(password.length() < 6){
+        else if(password.length() < 6){
             Toast.makeText(this, "Password length must be at least 6 characters", Toast.LENGTH_SHORT).show();
         }
-        if(!checkBox){
+        else if(!checkBox){
             Toast.makeText(this, "You need to agree to the Terms of Services and Privacy Policy.", Toast.LENGTH_SHORT).show();
         }
         else{
