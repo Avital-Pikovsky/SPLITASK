@@ -30,7 +30,7 @@ public class LoggedInProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(LoggedInProfile.this, myHistory.class));
+                startActivity(new Intent(LoggedInProfile.this, myLists.class));
             }
         });
 
@@ -52,7 +52,7 @@ public class LoggedInProfile extends AppCompatActivity {
         lists.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoggedInProfile.this, listActivity.class));
+                startActivity(new Intent(LoggedInProfile.this, freindsLists.class));
             }
         });
 

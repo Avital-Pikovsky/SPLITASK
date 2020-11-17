@@ -7,28 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class myHistory extends AppCompatActivity {
+public class freindsLists extends AppCompatActivity {
     private TextView returnBack;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_history);
-        setupUI();
-
-
+        setContentView(R.layout.activity_list);
         returnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(myHistory.this, LoggedInProfile.class));
+                startActivity(new Intent(freindsLists.this, LoggedInProfile.class));
             }
         });
     }
 
     private void setupUI() {
-        returnBack = (TextView) findViewById(R.id.returnKey);
+        returnBack = (TextView) findViewById(R.id.returnK);
     }
 
 }

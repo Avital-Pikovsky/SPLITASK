@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DuckLuck">
-        <activity android:name=".listActivity"></activity>
+        <activity android:name=".addNewList"></activity>
+        <activity android:name=".freindsLists" />
         <activity android:name=".contactUs" />
-        <activity android:name=".myHistory" />
+        <activity android:name=".myLists" />
         <activity android:name=".myProfile" />
         <activity android:name=".LoggedInProfile" />
         <activity android:name=".RegistrationActivity" />
