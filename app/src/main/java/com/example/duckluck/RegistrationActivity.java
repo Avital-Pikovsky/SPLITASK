@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText userName,userEmail, userPassword;
     private Button regButton;
     private TextView userLogin;
+    private CheckBox check;
 
     private FirebaseAuth firebaseAuth;
 
@@ -72,6 +74,7 @@ public class RegistrationActivity extends AppCompatActivity {
         userPassword = (EditText) findViewById(R.id.etUserPassword);
         regButton = (Button) findViewById(R.id.btnRegister);
         userLogin = (TextView) findViewById(R.id.tvUserLogin);
+        check = (CheckBox) findViewById(R.id.checkBox);
     }
     private Boolean validate(){
         Boolean result = false;
@@ -79,9 +82,22 @@ public class RegistrationActivity extends AppCompatActivity {
         String name = userName.getText().toString();
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
+        Boolean checkBox = check.isChecked();
 
         if(name.isEmpty() || email.isEmpty() || password.isEmpty()){
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
+        }
+        if(!name.matches("^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}")) {
+            Toast.makeText(this, "Please enter your full name", Toast.LENGTH_SHORT).show();
+        }
+        if(!email.matches("^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$")){
+            Toast.makeText(this, "Please enter valid Email", Toast.LENGTH_SHORT).show();
+        }
+        if(password.length() < 6){
+            Toast.makeText(this, "Password length must be at least 6 characters", Toast.LENGTH_SHORT).show();
+        }
+        if(!checkBox){
+            Toast.makeText(this, "You need to agree to the Terms of Services and Privacy Policy.", Toast.LENGTH_SHORT).show();
         }
         else{
             result = true;
