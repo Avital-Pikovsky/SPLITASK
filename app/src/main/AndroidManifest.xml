@@ -12,7 +12,6 @@
         <activity android:name=".addNewList"></activity>
         <activity android:name=".freindsLists" />
         <activity android:name=".contactUs" />
-        <activity android:name=".myLists" />
         <activity android:name=".myProfile" />
         <activity android:name=".LoggedInProfile" />
         <activity android:name=".RegistrationActivity" />
