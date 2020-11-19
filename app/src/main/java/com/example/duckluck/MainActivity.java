@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private EditText userEmail, userPassword;
-    private Button signInButton;
+    private Button signInButton, main;
     private TextView userSignUp, forgotPassword;
     private CheckBox check;
 
@@ -60,10 +60,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //forgot password
                 Toast.makeText(MainActivity.this, "NOT WORKING YET", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, ForgotPassword.class));
+
+            }
+        });
+
+        main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
 
             }
         });
+
     }
     private void setupUI(){
         userEmail = (EditText) findViewById(R.id.mainUserEmail);
@@ -72,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         userSignUp = (TextView) findViewById(R.id.register);
         forgotPassword = (TextView) findViewById(R.id.ForgotPass);
         check = (CheckBox) findViewById(R.id.checkBox);
+        main = (Button) findViewById(R.id.button2);
 
     }
     private void signIn(String userEmail, String userPassword){

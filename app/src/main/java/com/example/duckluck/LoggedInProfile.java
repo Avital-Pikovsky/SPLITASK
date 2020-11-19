@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class LoggedInProfile extends AppCompatActivity {
 
-    private TextView myProfile, myHistory, lists, contactUs, singOut;
+    private TextView myProfile, myHistory, lists, contactUs, signOut;
 
 
     @Override
@@ -41,7 +41,7 @@ public class LoggedInProfile extends AppCompatActivity {
                 startActivity(new Intent(LoggedInProfile.this, contactUs.class));
             }
         });
-        singOut.setOnClickListener(new View.OnClickListener() {
+        signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -62,7 +62,7 @@ public class LoggedInProfile extends AppCompatActivity {
         myHistory = (TextView) findViewById(R.id.myLists);
         lists = (TextView) findViewById(R.id.friendsLists);
         contactUs = (TextView) findViewById(R.id.contact);
-        singOut = (TextView) findViewById(R.id.singO);
+        signOut = (TextView) findViewById(R.id.signO);
     }
 
-    }
+}
