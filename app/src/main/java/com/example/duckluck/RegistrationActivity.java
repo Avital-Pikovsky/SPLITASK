@@ -16,15 +16,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private EditText userName,userEmail, userPassword;
+    private EditText userName,userEmail, userPassword, userPhone;
     private Button regButton;
     private TextView userLogin;
     private CheckBox check;
-
+    String name, email, password, phone;
     private FirebaseAuth firebaseAuth;
 
 
@@ -45,6 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
+                                sendUserData();
                                 Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
 
@@ -72,6 +75,7 @@ public class RegistrationActivity extends AppCompatActivity {
         userName = (EditText) findViewById(R.id.etUserName);
         userEmail = (EditText) findViewById(R.id.etUserEmail);
         userPassword = (EditText) findViewById(R.id.etUserPassword);
+        userPhone = (EditText) findViewById(R.id.etPhoneNumber);
         regButton = (Button) findViewById(R.id.btnRegister);
         userLogin = (TextView) findViewById(R.id.tvUserLogin);
         check = (CheckBox) findViewById(R.id.checkBox);
@@ -79,12 +83,13 @@ public class RegistrationActivity extends AppCompatActivity {
     private Boolean validate(){
         Boolean result = false;
 
-        String name = userName.getText().toString();
-        String email = userEmail.getText().toString();
-        String password = userPassword.getText().toString();
+        name = userName.getText().toString();
+        email = userEmail.getText().toString();
+        password = userPassword.getText().toString();
+        phone = userPhone.getText().toString();
         Boolean checkBox = check.isChecked();
 
-        if(name.isEmpty() || email.isEmpty() || password.isEmpty()){
+        if(name.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()){
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }
         else if(!name.matches("^[a-zA-Z]+\\s[a-zA-Z\\s]+$")) {
@@ -96,6 +101,10 @@ public class RegistrationActivity extends AppCompatActivity {
         else if(password.length() < 6){
             Toast.makeText(this, "Password length must be at least 6 characters", Toast.LENGTH_SHORT).show();
         }
+        else if(!phone.matches("^[0-9]+$") || phone.length() != 10){
+            Toast.makeText(this, "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+
+        }
         else if(!checkBox){
             Toast.makeText(this, "You need to agree to the Terms of Services and Privacy Policy.", Toast.LENGTH_SHORT).show();
         }
@@ -104,4 +113,11 @@ public class RegistrationActivity extends AppCompatActivity {
         }
         return result;
     }
+    private void sendUserData(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
+        UserProfile userProfile = new UserProfile(name, email, phone);
+        myRef.setValue(userProfile);
+    }
+
 }
