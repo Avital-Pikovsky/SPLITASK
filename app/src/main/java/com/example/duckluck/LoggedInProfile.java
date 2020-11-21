@@ -33,6 +33,12 @@ public class LoggedInProfile extends AppCompatActivity {
                 startActivity(new Intent(LoggedInProfile.this, myLists.class));
             }
         });
+        lists.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoggedInProfile.this, friendsLists.class));
+            }
+        });
 
         contactUs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,12 +55,7 @@ public class LoggedInProfile extends AppCompatActivity {
             }
         });
 
-        lists.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoggedInProfile.this, freindsLists.class));
-            }
-        });
+
 
         }
     private void setupUI(){

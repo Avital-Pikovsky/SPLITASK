@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class freindsLists extends AppCompatActivity {
+public class friendsLists extends AppCompatActivity {
     private TextView returnBack;
 
 
@@ -15,11 +15,13 @@ public class freindsLists extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        setupUI();
+
         returnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(freindsLists.this, LoggedInProfile.class));
+                startActivity(new Intent(friendsLists.this, LoggedInProfile.class));
             }
         });
     }

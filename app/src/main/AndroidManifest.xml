@@ -12,7 +12,7 @@
         <activity android:name=".ForgotPassword"></activity>
         <activity android:name=".myLists" />
         <activity android:name=".addNewList" />
-        <activity android:name=".freindsLists" />
+        <activity android:name=".friendsLists" />
         <activity android:name=".contactUs" />
         <activity android:name=".myProfile" />
         <activity android:name=".LoggedInProfile" />
