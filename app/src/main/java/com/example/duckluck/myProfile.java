@@ -39,7 +39,7 @@ public class myProfile extends AppCompatActivity {
 
         DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserProfile userProfile = snapshot.getValue(UserProfile.class);
@@ -70,7 +70,7 @@ public class myProfile extends AppCompatActivity {
         profilePic = (ImageView) findViewById(R.id.tvProfilePic);
         profileName = (TextView) findViewById((R.id.tvProfileName));
         profileEmail = (TextView) findViewById(R.id.tvProfileEmail);
-        profilePhone = (TextView) findViewById(R.id.etPhoneNumber);
+        profilePhone = (TextView) findViewById(R.id.tvProfilePhone);
         profileUpdate = (Button) findViewById(R.id.btnProfileUpdate);
     }
 
