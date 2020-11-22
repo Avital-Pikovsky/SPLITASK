@@ -23,7 +23,7 @@ public class myProfile extends AppCompatActivity {
 
     private ImageView profilePic;
     private TextView returnBack, profileName, profileEmail, profilePhone;
-    private Button profileUpdate;
+    private Button profileUpdate, changePassword;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -43,8 +43,8 @@ public class myProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserProfile userProfile = snapshot.getValue(UserProfile.class);
-                profileName.setText("Name:" + userProfile.getUserName());
-                profileEmail.setText("Email:" + userProfile.getUserEmail());
+                profileName.setText("Name: " + userProfile.getUserName());
+                profileEmail.setText("Email: " + userProfile.getUserEmail());
                 profilePhone.setText("Phone Number: " + userProfile.getUserPhone());
             }
 
@@ -54,11 +54,22 @@ public class myProfile extends AppCompatActivity {
 
             }
         });
+        profileUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(myProfile.this, UpdateProfile.class));
+            }
+        });
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(myProfile.this, UpdatePassword.class));
+            }
+        });
 
         returnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(myProfile.this, LoggedInProfile.class));
             }
         });
@@ -68,10 +79,11 @@ public class myProfile extends AppCompatActivity {
 
         returnBack = (TextView) findViewById(R.id.returnTextView);
         profilePic = (ImageView) findViewById(R.id.tvProfilePic);
-        profileName = (TextView) findViewById((R.id.tvProfileName));
+        profileName = (TextView) findViewById(R.id.tvProfileName);
         profileEmail = (TextView) findViewById(R.id.tvProfileEmail);
         profilePhone = (TextView) findViewById(R.id.tvProfilePhone);
         profileUpdate = (Button) findViewById(R.id.btnProfileUpdate);
+        changePassword = (Button) findViewById(R.id.btnChangePass);
     }
 
 }
