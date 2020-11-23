@@ -1,4 +1,4 @@
-package com.example.duckluck;
+package Activitis;
 
 import androidx.appcompat.app.AppCompatActivity;
 

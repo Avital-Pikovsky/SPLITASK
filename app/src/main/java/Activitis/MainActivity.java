@@ -1,4 +1,4 @@
-package com.example.duckluck;
+package Activitis;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setupUI();
 
-        firebaseAuth = FirebaseAuth.getInstance();
+    firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //to not login again

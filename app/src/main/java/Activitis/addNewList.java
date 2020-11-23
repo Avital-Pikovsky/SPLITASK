@@ -1,4 +1,4 @@
-package com.example.duckluck;
+package Activitis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,12 +37,17 @@ import android.widget.ListView;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_list);
+        setupUI();
+
         datasource = new ArrayList<String>();
         adapter = new MyAdapter();
+
+        datasource.add("hi");
+
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
         listView.setOnItemLongClickListener(this);
-        setupUI();
+
         findViewById(R.id.button).setOnClickListener(new OnClickListener() {
 
 
@@ -58,6 +63,12 @@ import android.widget.ListView;
                 dialog.show();
             }
         });
+    }
+//this functions adds the new added list to the database,
+//under the person who created it.
+    public void addListToDB(ArrayList<String> addedList){
+
+
     }
 
 //    @Override
@@ -85,39 +96,9 @@ public void onClick(View v) {
     }
 }
 
-    private class MyAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            // TODO Auto-generated method stub
-            return datasource.size();
+        private void setupUI() {
+            listName = (EditText) findViewById(R.id.listname);
         }
-
-        @Override
-        public Object getItem(int position) {
-            // TODO Auto-generated method stub
-            return datasource.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            // TODO Auto-generated method stub
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            TextView view = (TextView) convertView;
-            if (null == view) {
-                view = new TextView(addNewList.this);
-                view.setPadding(10, 10, 10, 10);
-            }
-            view.setText(datasource.get(position));
-            return view;
-        }
-    }
-
-
 
     @Override
     public boolean onItemLongClick(AdapterView<?> listView, View view,
@@ -127,11 +108,36 @@ public void onClick(View v) {
         return true;
     }
 
-        private void setupUI() {
+        private class MyAdapter extends BaseAdapter {
 
+            @Override
+            public int getCount() {
+                // TODO Auto-generated method stub
+                return datasource.size();
+            }
 
-            listName = (EditText) findViewById(R.id.listname);
+            @Override
+            public Object getItem(int position) {
+                // TODO Auto-generated method stub
+                return datasource.get(position);
+            }
 
+            @Override
+            public long getItemId(int position) {
+                // TODO Auto-generated method stub
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView view = (TextView) convertView;
+                if (null == view) {
+                    view = new TextView(addNewList.this);
+                    view.setPadding(10, 10, 10, 10);
+                }
+                view.setText(datasource.get(position));
+                return view;
+            }
         }
 }
 

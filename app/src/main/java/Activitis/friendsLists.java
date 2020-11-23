@@ -1,4 +1,4 @@
-package com.example.duckluck;
+package Activitis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,7 @@ public class friendsLists extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_friends_list);
         setupUI();
 
         returnBack.setOnClickListener(new View.OnClickListener() {

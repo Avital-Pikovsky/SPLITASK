@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.duckluck">
+    package="Activitis">
 
     <application
         android:allowBackup="true"
@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DuckLuck">
-        <activity android:name=".UpdatePassword"></activity>
-        <activity android:name=".UpdateProfile" />
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".myLists" />
-        <activity android:name=".addNewList" />
-        <activity android:name=".friendsLists" />
-        <activity android:name=".contactUs" />
-        <activity android:name=".myProfile" />
-        <activity android:name=".LoggedInProfile" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="Activitis.UpdatePassword"></activity>
+        <activity android:name="Activitis.UpdateProfile" />
+        <activity android:name="Activitis.ForgotPassword" />
+        <activity android:name="Activitis.myLists" />
+        <activity android:name="Activitis.addNewList" />
+        <activity android:name="Activitis.friendsLists" />
+        <activity android:name="Activitis.contactUs" />
+        <activity android:name="Activitis.myProfile" />
+        <activity android:name="Activitis.LoggedInProfile" />
+        <activity android:name="Activitis.RegistrationActivity" />
+        <activity android:name="Activitis.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

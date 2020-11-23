@@ -1,4 +1,4 @@
-package com.example.duckluck;
+package Activitis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class myLists extends AppCompatActivity {
@@ -19,18 +18,12 @@ public class myLists extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_history);
+        setContentView(R.layout.activity_my_lists);
         setupUI();
 
         final ListView list = findViewById(R.id.list);
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("1");
-        arrayList.add("2");
-        arrayList.add("3");
-        arrayList.add("4");
-        arrayList.add("5");
-        arrayList.add("6");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,                   android.R.layout.simple_list_item_1, arrayList);
+        ArrayList<String> listHistory = new ArrayList<>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listHistory);
         list.setAdapter(arrayAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
