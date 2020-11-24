@@ -1,23 +1,30 @@
 package Adapters;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserProfile {
 
     public String userName;
     public  String userEmail;
     public String userPhone;
-    public ArrayList<ArrayList<String>> lists;
+    public HashMap<String, ListAdapter> listMap;
 
     public UserProfile(String userName, String userEmail, String userPhone){
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
-        lists = null;
+        listMap = null;
     }
 
     public UserProfile(){
 
+    }
+
+    public void addToMap(String name, ListAdapter newList){
+    listMap.put(name,newList);
+
+    //for future, what if there is already list with that name?
     }
 
     public String getUserName() {
@@ -44,7 +51,7 @@ public class UserProfile {
         this.userPhone = userPhone;
     }
 
-    public ArrayList<ArrayList<String>> getLists() { return lists; }
+    public HashMap<String, ListAdapter> getLists() { return listMap; }
 
-    public void setLists(ArrayList<ArrayList<String>> newList){ this.lists = newList; }
+    public void setLists(HashMap<String, ListAdapter> newMap){ this.listMap = newMap; }
 }

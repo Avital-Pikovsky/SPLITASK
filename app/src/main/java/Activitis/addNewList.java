@@ -19,17 +19,27 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import Adapters.UserProfile;
+import Adapters.ListAdapter;
 
 
-
-    public class addNewList extends Activity implements OnClickListener,
+public class addNewList extends Activity implements OnClickListener,
             OnItemLongClickListener {
-
 
         private ArrayList<String> datasource;
         private MyAdapter adapter;
         private Dialog dialog;
         private EditText listName;
+        private Button save;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
 
 
 
@@ -63,19 +73,28 @@ import android.widget.ListView;
                 dialog.show();
             }
         });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addListToDB(listName.getText().toString(),datasource);
+            }
+        });
     }
+
 //this functions adds the new added list to the database,
 //under the person who created it.
-    public void addListToDB(ArrayList<String> addedList){
+    public void addListToDB(String name, ArrayList<String> addedList){
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+ListAdapter newList = new ListAdapter(name, addedList);
+databaseReference.child(firebaseAuth.getUid()).child("lists").setValue(newList);
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.addNewList, menu);
-//        return true;
-//    }
 @Override
 public void onClick(View v) {
     switch (v.getId()) {
@@ -98,6 +117,7 @@ public void onClick(View v) {
 
         private void setupUI() {
             listName = (EditText) findViewById(R.id.listname);
+            save = (Button) findViewById(R.id.SaveButton);
         }
 
     @Override
