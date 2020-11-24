@@ -91,6 +91,12 @@ public class addNewList extends Activity implements OnClickListener,
         final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
 
 ListAdapter newList = new ListAdapter(name, addedList);
+
+//current email,name.....
+//UserProfile Userp;
+//Userp.addToMap();
+//databaseReference.setValue();
+
 databaseReference.child(firebaseAuth.getUid()).child("lists").setValue(newList);
 
     }
