@@ -62,7 +62,7 @@ public class UpdateProfile extends AppCompatActivity {
 
                 UserProfile userProfile = new UserProfile(name, email, phone);
 
-                databaseReference.setValue(userProfile);
+                databaseReference.child("User details").setValue(userProfile);
 
                 startActivity(new Intent(UpdateProfile.this, myProfile.class));
                 Toast.makeText(UpdateProfile.this, "Changed Successfully!", Toast.LENGTH_SHORT).show();

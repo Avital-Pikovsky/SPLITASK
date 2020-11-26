@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.Menu;
@@ -30,17 +32,16 @@ import Adapters.ListAdapter;
 
 
 public class addNewList extends Activity implements OnClickListener,
-            OnItemLongClickListener {
+        OnItemLongClickListener {
 
-        private ArrayList<String> datasource;
-        private MyAdapter adapter;
-        private Dialog dialog;
-        private EditText listName;
-        private Button save;
+    private ArrayList<String> datasource;
+    private MyAdapter adapter;
+    private Dialog dialog;
+    private EditText listName;
+    private Button save;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-
 
 
     @Override
@@ -61,7 +62,6 @@ public class addNewList extends Activity implements OnClickListener,
         findViewById(R.id.button).setOnClickListener(new OnClickListener() {
 
 
-
             @Override
             public void onClick(View v) {
                 dialog = new Dialog(addNewList.this);
@@ -77,54 +77,49 @@ public class addNewList extends Activity implements OnClickListener,
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addListToDB(listName.getText().toString(),datasource);
+                addListToDB(listName.getText().toString(), datasource);
             }
         });
     }
 
-//this functions adds the new added list to the database,
+    //this functions adds the new added list to the database,
 //under the person who created it.
-    public void addListToDB(String name, ArrayList<String> addedList){
+    public void addListToDB(String name, ArrayList<String> addedList) {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
 
-ListAdapter newList = new ListAdapter(name, addedList);
-
-//current email,name.....
-//UserProfile Userp;
-//Userp.addToMap();
-//databaseReference.setValue();
-
-databaseReference.child(firebaseAuth.getUid()).child("lists").setValue(newList);
+        ListAdapter newList = new ListAdapter(name, addedList,firebaseAuth.getUid());
+        DatabaseReference newListRef = databaseReference.child("User lists").push();
+        newListRef.setValue(newList);
 
     }
 
-@Override
-public void onClick(View v) {
-    switch (v.getId()) {
-        case R.id.button_cancel:
-            dialog.dismiss();
-            break;
-
-        case R.id.button_ok:
-            String text = ((EditText) dialog.findViewById(R.id.edit_box))
-                    .getText().toString();
-            if (null != text && 0 != text.compareTo("")) {
-                datasource.add(text);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_cancel:
                 dialog.dismiss();
-                adapter.notifyDataSetChanged();
-            }
+                break;
 
-            break;
-    }
-}
+            case R.id.button_ok:
+                String text = ((EditText) dialog.findViewById(R.id.edit_box))
+                        .getText().toString();
+                if (null != text && 0 != text.compareTo("")) {
+                    datasource.add(text);
+                    dialog.dismiss();
+                    adapter.notifyDataSetChanged();
+                }
 
-        private void setupUI() {
-            listName = (EditText) findViewById(R.id.listname);
-            save = (Button) findViewById(R.id.SaveButton);
+                break;
         }
+    }
+
+    private void setupUI() {
+        listName = (EditText) findViewById(R.id.listname);
+        save = (Button) findViewById(R.id.SaveButton);
+    }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> listView, View view,
@@ -134,37 +129,37 @@ public void onClick(View v) {
         return true;
     }
 
-        private class MyAdapter extends BaseAdapter {
+    private class MyAdapter extends BaseAdapter {
 
-            @Override
-            public int getCount() {
-                // TODO Auto-generated method stub
-                return datasource.size();
-            }
-
-            @Override
-            public Object getItem(int position) {
-                // TODO Auto-generated method stub
-                return datasource.get(position);
-            }
-
-            @Override
-            public long getItemId(int position) {
-                // TODO Auto-generated method stub
-                return position;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView view = (TextView) convertView;
-                if (null == view) {
-                    view = new TextView(addNewList.this);
-                    view.setPadding(10, 10, 10, 10);
-                }
-                view.setText(datasource.get(position));
-                return view;
-            }
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return datasource.size();
         }
+
+        @Override
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return datasource.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView view = (TextView) convertView;
+            if (null == view) {
+                view = new TextView(addNewList.this);
+                view.setPadding(10, 10, 10, 10);
+            }
+            view.setText(datasource.get(position));
+            return view;
+        }
+    }
 }
 
 

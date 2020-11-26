@@ -116,11 +116,11 @@ public class RegistrationActivity extends AppCompatActivity {
         }
         return result;
     }
+
     private void sendUserData(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
         UserProfile userProfile = new UserProfile(name, email, phone);
-        myRef.setValue(userProfile);
+        myRef.child("User details").setValue(userProfile);
     }
-
 }

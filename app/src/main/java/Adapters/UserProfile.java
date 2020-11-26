@@ -8,23 +8,16 @@ public class UserProfile {
     public String userName;
     public  String userEmail;
     public String userPhone;
-    public HashMap<String, ListAdapter> listMap;
 
     public UserProfile(String userName, String userEmail, String userPhone){
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
-        listMap = null;
+//        listOfLA = null;
     }
 
     public UserProfile(){
 
-    }
-
-    public void addToMap(String name, ListAdapter newList){
-    listMap.put(name,newList);
-
-    //for future, what if there is already list with that name?
     }
 
     public String getUserName() {
@@ -51,7 +44,4 @@ public class UserProfile {
         this.userPhone = userPhone;
     }
 
-    public HashMap<String, ListAdapter> getLists() { return listMap; }
-
-    public void setLists(HashMap<String, ListAdapter> newMap){ this.listMap = newMap; }
 }
