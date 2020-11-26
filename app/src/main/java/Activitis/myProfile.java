@@ -39,7 +39,7 @@ public class myProfile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
