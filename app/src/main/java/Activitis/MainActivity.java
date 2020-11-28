@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //forgot password
-                Toast.makeText(MainActivity.this, "NOT WORKING YET", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, ForgotPassword.class));
 
             }
