@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="Activitis">
+    package="Activities">
 
     <application
         android:allowBackup="true"
@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DuckLuck">
-        <activity android:name="Activitis.UpdatePassword"></activity>
-        <activity android:name="Activitis.UpdateProfile" />
-        <activity android:name="Activitis.ForgotPassword" />
-        <activity android:name="Activitis.myLists" />
-        <activity android:name="Activitis.addNewList" />
-        <activity android:name="Activitis.friendsLists" />
-        <activity android:name="Activitis.contactUs" />
-        <activity android:name="Activitis.myProfile" />
-        <activity android:name="Activitis.LoggedInProfile" />
-        <activity android:name="Activitis.RegistrationActivity" />
-        <activity android:name="Activitis.MainActivity">
+        <activity android:name="Activities.UpdatePassword"></activity>
+        <activity android:name="Activities.UpdateProfile" />
+        <activity android:name="Activities.ForgotPassword" />
+        <activity android:name="Activities.myLists" />
+        <activity android:name="Activities.addNewList" />
+        <activity android:name="Activities.friendsLists" />
+        <activity android:name="Activities.contactUs" />
+        <activity android:name="Activities.myProfile" />
+        <activity android:name="Activities.LoggedInProfile" />
+        <activity android:name="Activities.RegistrationActivity" />
+        <activity android:name="Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

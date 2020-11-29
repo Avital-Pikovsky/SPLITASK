@@ -1,7 +1,6 @@
-package Activitis;
+package Activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,12 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,9 +29,10 @@ import Adapters.UserProfile;
 
 public class myLists extends AppCompatActivity {
     private TextView returnBack, addList;
+    private ImageButton Refresh;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User Lists");
+    private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User lists");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,18 @@ public class myLists extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) list.getItemAtPosition(position);
-                Toast.makeText(myLists.this, clickedItem, Toast.LENGTH_LONG).show();
             }
         });
-        
+
+        //Restarts the page to load list from DB.
+        Refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(myLists.this, myLists.class));
+            }
+        });
+
         returnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,12 +76,28 @@ public class myLists extends AppCompatActivity {
             }
         });
 
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
+                    ListAdapter LA = uniqueUserSnapshot.getValue(ListAdapter.class);
+                    listHistory.add(LA.getName()+" ID: "+LA.getId());
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
 
     private void setupUI() {
         returnBack = (TextView) findViewById(R.id.returnBackKey);
         addList = (TextView) findViewById(R.id.addList);
+        Refresh = (ImageButton) findViewById(R.id.refresh);
 
 
     }

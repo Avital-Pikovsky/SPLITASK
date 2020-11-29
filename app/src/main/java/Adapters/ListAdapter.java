@@ -8,14 +8,15 @@ public class ListAdapter {
     public String name;
     public String ownerId;
     public int id;
-    public static int idCounter = 1;
 
-    public ListAdapter(String name, ArrayList<String> list, String ownerId) {
+    public ListAdapter(String name, ArrayList<String> list, String ownerId, int id) {
         this.list = list;
         this.name = name;
         this.ownerId = ownerId;
-        this.id = idCounter;
-        idCounter++;
+        this.id = id;
+    }
+
+    public ListAdapter() {
     }
 
     public String getName() {
@@ -34,4 +35,19 @@ public class ListAdapter {
         this.list = newList;
     }
 
+    public String getOwnerId() {
+        return this.ownerId;
+    }
+
+    public void setOwnerId(String newOwnerID) {
+        this.ownerId = newOwnerID;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int newID) {
+        this.id = newID;
+    }
 }

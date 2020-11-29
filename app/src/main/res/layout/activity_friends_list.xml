@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Activitis.friendsLists">
+    tools:context="Activities.friendsLists">
 
     <TextView
         android:id="@+id/returnK"
@@ -14,6 +14,52 @@
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <TextView
+        android:id="@+id/join"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Join A List"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColorLink="#03A9F4"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.579"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <ImageView
+        android:id="@+id/listPic"
+        android:layout_width="52dp"
+        android:layout_height="45dp"
+        android:background="#11FFFFFF"
+        android:tint="#041B2E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.292"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="?attr/actionModePasteDrawable" />
+
+    <ImageButton
+        android:id="@+id/ref"
+        android:layout_width="50dp"
+        android:layout_height="56dp"
+        android:backgroundTint="#FFFFFF"
+        android:tint="#03A9F4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002"
+        app:srcCompat="@android:drawable/ic_popup_sync" />
 </androidx.constraintlayout.widget.ConstraintLayout>

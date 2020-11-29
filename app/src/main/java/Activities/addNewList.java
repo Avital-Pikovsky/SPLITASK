@@ -1,12 +1,8 @@
-package Activitis;
+package Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,20 +10,17 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.view.Menu;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import Adapters.UserProfile;
 import Adapters.ListAdapter;
 
 
@@ -52,8 +45,6 @@ public class addNewList extends Activity implements OnClickListener,
 
         datasource = new ArrayList<String>();
         adapter = new MyAdapter();
-
-        datasource.add("hi");
 
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
@@ -89,8 +80,8 @@ public class addNewList extends Activity implements OnClickListener,
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
-
-        ListAdapter newList = new ListAdapter(name, addedList,firebaseAuth.getUid());
+        int id = (int) (Math.random() * (10000 - 1)) + 1;
+        ListAdapter newList = new ListAdapter(name, addedList, firebaseAuth.getUid(), id);
         DatabaseReference newListRef = databaseReference.child("User lists").push();
         newListRef.setValue(newList);
 
