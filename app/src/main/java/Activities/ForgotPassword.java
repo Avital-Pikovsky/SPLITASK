@@ -37,19 +37,17 @@ public class ForgotPassword extends AppCompatActivity {
             public void onClick(View v) {
                 String user_email = passwordEmail.getText().toString().trim();
 
-                if(user_email.isEmpty()){
+                if (user_email.isEmpty()) {
                     Toast.makeText(ForgotPassword.this, "Please enter your registered email", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     firebaseAuth.sendPasswordResetEmail(user_email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(ForgotPassword.this, "Password reset email sent!", Toast.LENGTH_SHORT).show();
                                 finish();
                                 startActivity(new Intent(ForgotPassword.this, MainActivity.class));
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(ForgotPassword.this, "Error in sending reset email!", Toast.LENGTH_SHORT).show();
 
                             }
@@ -61,7 +59,7 @@ public class ForgotPassword extends AppCompatActivity {
         returnKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
                 startActivity(new Intent(ForgotPassword.this, MainActivity.class));
             }
         });

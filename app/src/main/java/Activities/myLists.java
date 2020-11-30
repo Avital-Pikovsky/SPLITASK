@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,10 +45,16 @@ public class myLists extends AppCompatActivity {
         ArrayList<String> listHistory = new ArrayList<>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listHistory);
         list.setAdapter(arrayAdapter);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) list.getItemAtPosition(position);
+                String sp[] = clickedItem.split("ID:");
+                String key = sp[1];
+                Intent i = new Intent(myLists.this, ClickedListManager.class);
+                i.putExtra("listKey", key);
+                startActivity(i);
             }
         });
 
@@ -55,8 +62,9 @@ public class myLists extends AppCompatActivity {
         Refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+                startActivity(getIntent());
 
-                startActivity(new Intent(myLists.this, myLists.class));
             }
         });
 
@@ -81,7 +89,8 @@ public class myLists extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                     ListAdapter LA = uniqueUserSnapshot.getValue(ListAdapter.class);
-                    listHistory.add(LA.getName()+" ID: "+LA.getId());
+                    listHistory.add(LA.getName() + " ID:" + LA.getId());
+                    arrayAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -98,7 +107,6 @@ public class myLists extends AppCompatActivity {
         returnBack = (TextView) findViewById(R.id.returnBackKey);
         addList = (TextView) findViewById(R.id.addList);
         Refresh = (ImageButton) findViewById(R.id.refresh);
-
 
     }
 

@@ -1,31 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="Activities">
+<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="Activities">
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.DuckLuck">
-        <activity android:name="Activities.UpdatePassword"></activity>
-        <activity android:name="Activities.UpdateProfile" />
-        <activity android:name="Activities.ForgotPassword" />
-        <activity android:name="Activities.myLists" />
-        <activity android:name="Activities.addNewList" />
-        <activity android:name="Activities.friendsLists" />
-        <activity android:name="Activities.contactUs" />
-        <activity android:name="Activities.myProfile" />
-        <activity android:name="Activities.LoggedInProfile" />
-        <activity android:name="Activities.RegistrationActivity" />
-        <activity android:name="Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.DuckLuck">
+    <activity android:name="Activities.UpdatePassword"></activity>
+    <activity android:name="Activities.UpdateProfile" />
+    <activity android:name="Activities.ForgotPassword" />
+    <activity android:name="Activities.myLists" />
+    <activity android:name="Activities.addNewList" />
+    <activity android:name="Activities.friendsLists" />
+    <activity android:name="Activities.contactUs" />
+    <activity android:name="Activities.myProfile" />
+    <activity android:name="Activities.LoggedInProfile" />
+    <activity android:name="Activities.RegistrationActivity" />
+    <activity android:name="Activities.ClickedListManager" />
+    <activity android:name="Activities.clickedFriendLists"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+
+    <activity android:name="Activities.MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+</application>
 
 </manifest>
+
