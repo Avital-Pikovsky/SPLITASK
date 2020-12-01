@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import Adapters.ListAdapter;
 
-public class clickedFriendLists extends AppCompatActivity {
+public class clickedJoinedList extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();

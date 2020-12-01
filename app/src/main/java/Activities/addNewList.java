@@ -1,5 +1,6 @@
 package Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -69,7 +70,10 @@ public class addNewList extends Activity implements OnClickListener,
             @Override
             public void onClick(View v) {
                 addListToDB(listName.getText().toString(), datasource);
+                finish();
+                startActivity(new Intent(addNewList.this, CreatedLists.class));
             }
+
         });
     }
 
@@ -82,7 +86,7 @@ public class addNewList extends Activity implements OnClickListener,
         final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
         int id = (int) (Math.random() * (10000 - 1)) + 1;
         ListAdapter newList = new ListAdapter(name, addedList, firebaseAuth.getUid(), id);
-        DatabaseReference newListRef = databaseReference.child("User lists").push();
+        DatabaseReference newListRef = databaseReference.child("Created lists").push();
         newListRef.setValue(newList);
 
     }

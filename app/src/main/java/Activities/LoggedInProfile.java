@@ -30,13 +30,13 @@ public class LoggedInProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(LoggedInProfile.this, myLists.class));
+                startActivity(new Intent(LoggedInProfile.this, CreatedLists.class));
             }
         });
         lists.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoggedInProfile.this, friendsLists.class));
+                startActivity(new Intent(LoggedInProfile.this, JoinedLists.class));
             }
         });
 

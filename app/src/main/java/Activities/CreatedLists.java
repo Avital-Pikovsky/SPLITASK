@@ -2,10 +2,9 @@ package Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Dialog;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,32 +21,24 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import Adapters.ListAdapter;
 
-
-public class friendsLists extends AppCompatActivity implements AddIdOfListDialog.OnInputListener{
-
-    private static final String TAG = "friendsLists";
-
-    private TextView returnBack, joinList;
+public class CreatedLists extends AppCompatActivity {
+    private TextView returnBack, addList;
     private ImageButton Refresh;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private final DatabaseReference databaseReference = firebaseDatabase.getReference();
-    public TextView mInputDisplay;
-    public String mInput;
+    private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("Created lists");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_list);
+        setContentView(R.layout.activity_my_lists);
         setupUI();
-        joinList = findViewById(R.id.join);
-        mInputDisplay = findViewById(R.id.input_display);
-
 
         final ListView list = findViewById(R.id.list);
-        ArrayList<String> friendListHistory = new ArrayList<>();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friendListHistory);
+        ArrayList<String> listHistory = new ArrayList<>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listHistory);
         list.setAdapter(arrayAdapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,28 +47,9 @@ public class friendsLists extends AppCompatActivity implements AddIdOfListDialog
                 String clickedItem = (String) list.getItemAtPosition(position);
                 String sp[] = clickedItem.split("ID:");
                 String key = sp[1];
-                Intent i = new Intent(friendsLists.this, ClickedListManager.class);
+                Intent i = new Intent(CreatedLists.this, ClickedListManager.class);
                 i.putExtra("listKey", key);
                 startActivity(i);
-            }
-        });
-
-        returnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(new Intent(friendsLists.this, LoggedInProfile.class));
-            }
-        });
-
-        //The user put unique ID, probably through some kind of simple dialog.
-        //This ID got searched in the whole DB and the right list added to the friendListHistory list.
-        joinList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: opening dialog.");
-                AddIdOfListDialog dialog = new AddIdOfListDialog();
-                dialog.show(getFragmentManager(), "AddIdOfListDialog");
             }
         });
 
@@ -87,14 +59,34 @@ public class friendsLists extends AppCompatActivity implements AddIdOfListDialog
             public void onClick(View v) {
                 finish();
                 startActivity(getIntent());
+
             }
         });
 
-        //looping on ALL the database looking for list that the user is part of.
+        returnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(CreatedLists.this, LoggedInProfile.class));
+            }
+        });
+
+        addList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(CreatedLists.this, addNewList.class));
+            }
+        });
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
+                    ListAdapter LA = uniqueUserSnapshot.getValue(ListAdapter.class);
+                    listHistory.add(LA.getName() + " ID:" + LA.getId());
+                    arrayAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -107,17 +99,10 @@ public class friendsLists extends AppCompatActivity implements AddIdOfListDialog
     }
 
     private void setupUI() {
-
-        returnBack = (TextView) findViewById(R.id.returnK);
-        joinList = (TextView) findViewById(R.id.join);
-        Refresh = (ImageButton) findViewById(R.id.ref);
+        returnBack = (TextView) findViewById(R.id.returnBackKey);
+        addList = (TextView) findViewById(R.id.addList);
+        Refresh = (ImageButton) findViewById(R.id.refresh);
 
     }
 
-    @Override
-    public void sendInput(String input) {
-        Log.d(TAG, "sendInput: got the input: " + input);
-
-        mInputDisplay.setText(input);
-    }
 }

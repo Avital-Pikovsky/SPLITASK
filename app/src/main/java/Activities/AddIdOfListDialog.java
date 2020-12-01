@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.jetbrains.annotations.Nullable;
+import com.google.firebase.database.annotations.Nullable;
+
 
 public class AddIdOfListDialog extends DialogFragment {
 
@@ -33,9 +34,6 @@ public class AddIdOfListDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_goin_list, container, false);
-        mActionCancel = view.findViewById(R.id.action_cancel);
-        mActionOk = view.findViewById(R.id.action_ok);
-        mInput = view.findViewById(R.id.input);
 
         mActionCancel.setOnClickListener(new View.OnClickListener() {
             @Override

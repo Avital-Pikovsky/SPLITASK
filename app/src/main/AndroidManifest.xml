@@ -11,15 +11,15 @@ package="Activities">
     <activity android:name="Activities.UpdatePassword"></activity>
     <activity android:name="Activities.UpdateProfile" />
     <activity android:name="Activities.ForgotPassword" />
-    <activity android:name="Activities.myLists" />
+    <activity android:name="Activities.CreatedLists" />
     <activity android:name="Activities.addNewList" />
-    <activity android:name="Activities.friendsLists" />
+    <activity android:name="Activities.JoinedLists" />
     <activity android:name="Activities.contactUs" />
     <activity android:name="Activities.myProfile" />
     <activity android:name="Activities.LoggedInProfile" />
     <activity android:name="Activities.RegistrationActivity" />
     <activity android:name="Activities.ClickedListManager" />
-    <activity android:name="Activities.clickedFriendLists"/>
+    <activity android:name="Activities.clickedJoinedList"/>
 
 
     <activity android:name="Activities.MainActivity">
