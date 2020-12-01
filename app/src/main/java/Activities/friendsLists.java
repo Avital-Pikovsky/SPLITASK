@@ -2,9 +2,10 @@ package Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,20 +22,28 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import Adapters.ListAdapter;
 
-public class friendsLists extends AppCompatActivity {
+
+public class friendsLists extends AppCompatActivity implements AddIdOfListDialog.OnInputListener{
+
+    private static final String TAG = "friendsLists";
+
     private TextView returnBack, joinList;
     private ImageButton Refresh;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference();
+    public TextView mInputDisplay;
+    public String mInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
         setupUI();
+        joinList = findViewById(R.id.join);
+        mInputDisplay = findViewById(R.id.input_display);
+
 
         final ListView list = findViewById(R.id.list);
         ArrayList<String> friendListHistory = new ArrayList<>();
@@ -66,7 +75,9 @@ public class friendsLists extends AppCompatActivity {
         joinList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG, "onClick: opening dialog.");
+                AddIdOfListDialog dialog = new AddIdOfListDialog();
+                dialog.show(getFragmentManager(), "AddIdOfListDialog");
             }
         });
 
@@ -103,4 +114,10 @@ public class friendsLists extends AppCompatActivity {
 
     }
 
+    @Override
+    public void sendInput(String input) {
+        Log.d(TAG, "sendInput: got the input: " + input);
+
+        mInputDisplay.setText(input);
+    }
 }

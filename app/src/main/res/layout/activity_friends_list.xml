@@ -8,20 +8,20 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="342dp"
-        android:layout_height="311dp"
+        android:layout_width="311dp"
+        android:layout_height="228dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.469">
+        app:layout_constraintVertical_bias="0.526">
 
         <ListView
             android:id="@+id/list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
@@ -59,26 +59,41 @@
         android:layout_width="52dp"
         android:layout_height="45dp"
         android:background="#11FFFFFF"
-        android:tint="#041B2E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.292"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="?attr/actionModePasteDrawable" />
+        app:srcCompat="?attr/actionModePasteDrawable"
+        app:tint="#041B2E" />
 
     <ImageButton
         android:id="@+id/ref"
-        android:layout_width="50dp"
-        android:layout_height="56dp"
+        android:layout_width="48dp"
+        android:layout_height="52dp"
         android:backgroundTint="#FFFFFF"
         android:tint="#03A9F4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.002"
+        app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@android:drawable/ic_popup_sync" />
+
+    <TextView
+        android:id="@+id/input_display"
+        android:layout_width="216dp"
+        android:layout_height="106dp"
+        android:layout_below="@+id/join"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.192" />
 </androidx.constraintlayout.widget.ConstraintLayout>
