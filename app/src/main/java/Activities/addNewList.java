@@ -106,7 +106,6 @@ public class addNewList extends Activity implements OnClickListener,
                     dialog.dismiss();
                     adapter.notifyDataSetChanged();
                 }
-
                 break;
         }
     }

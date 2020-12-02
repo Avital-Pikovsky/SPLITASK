@@ -28,7 +28,7 @@ import Adapters.ListAdapter;
 
 public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.OnInputListener {
 
-    private static final String TAG = "friendsLists";
+    private static final String TAG = "JoinedLists";
 
     private TextView returnBack, joinList;
     private ImageButton Refresh;
@@ -37,7 +37,7 @@ public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.
     private final DatabaseReference databaseReference = firebaseDatabase.getReference();
     private DatabaseReference JoinedListsRef = databaseReference.child(firebaseAuth.getUid()).child("Joined lists");
     public TextView mInputDisplay;
-    public String mInput;
+    public String keyInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.
                 String clickedItem = (String) list.getItemAtPosition(position);
                 String sp[] = clickedItem.split("ID:");
                 String key = sp[1];
-                Intent i = new Intent(JoinedLists.this, ClickedListManager.class);
+                Intent i = new Intent(JoinedLists.this, clickedJoinedList.class);
                 i.putExtra("listKey", key);
                 startActivity(i);
             }
@@ -75,14 +75,14 @@ public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.
         joinList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d(TAG, "onClick: opening dialog.");
-//                AddIdOfListDialog dialog = new AddIdOfListDialog();
-//                dialog.show(getFragmentManager(), "AddIdOfListDialog");
+                Log.d(TAG, "onClick: opening dialog.");
+                AddIdOfListDialog dialog = new AddIdOfListDialog();
+                dialog.show(getFragmentManager(), "AddIdOfListDialog");
 
-                String testKey = "6681";
+                friendListHistory.add(keyInput);
                 //need to find the list by ID
                 //and add it to the person calling
-                JoinedListAdapter JLA = new JoinedListAdapter(testKey);
+                JoinedListAdapter JLA = new JoinedListAdapter(keyInput);
                 DatabaseReference newListRef = JoinedListsRef.push();
                 newListRef.setValue(JLA);
 
@@ -101,36 +101,43 @@ public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.
         //looping on ALL the database looking for list that the user is part of.
         JoinedListsRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot1) {
+                for (DataSnapshot uniqueUserSnapshot1 : dataSnapshot1.getChildren()) {
+                    JoinedListAdapter JLA = uniqueUserSnapshot1.getValue(JoinedListAdapter.class);
+                    arrayAdapter.notifyDataSetChanged();
 
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+                            for (DataSnapshot uniqueUserSnapshot2 : dataSnapshot2.getChildren()) {
+                                for (DataSnapshot uniqueUserSnapshot3 : uniqueUserSnapshot2.child("Created lists").getChildren()) {
+                                    ListAdapter LA = uniqueUserSnapshot3.getValue(ListAdapter.class);
+
+                                    if (JLA.getId().equals(LA.getId() + "")) {
+                                        friendListHistory.add(LA.getName() + " ID:" + LA.getId());
+                                        arrayAdapter.notifyDataSetChanged();
+
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
+
         });
     }
-
-    //                for (DataSnapshot uniqueUserSnapshot1 : dataSnapshot1.getChildren()) {
-//                    JoinedListAdapter JLA = uniqueUserSnapshot1.getValue(JoinedListAdapter.class);
-//
-//                    databaseReference.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
-//                            for (DataSnapshot uniqueUserSnapshot2 : dataSnapshot2.getChildren()) {
-//                                for (DataSnapshot uniqueUserSnapshot3 : dataSnapshot2.child("Created lists").getChildren()) {
-//                                    ListAdapter LA = uniqueUserSnapshot3.getValue(ListAdapter.class);
-//                                    if (JLA.getId().equals(LA.getId() + "")){
-//                                        friendListHistory.add(LA.getName() + " ID:" + LA.getId());
-//                                        arrayAdapter.notifyDataSetChanged();
-//
-//                                    }
-//                                }
-//                            }
-//
-//                        }
-//
-
 
     private void setupUI() {
 
@@ -143,7 +150,6 @@ public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.
     @Override
     public void sendInput(String input) {
         Log.d(TAG, "sendInput: got the input: " + input);
-
-        mInputDisplay.setText(input);
+//        mInputDisplay.setText(input);
     }
 }

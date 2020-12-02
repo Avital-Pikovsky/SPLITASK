@@ -35,6 +35,10 @@ public class AddIdOfListDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_goin_list, container, false);
 
+        mActionCancel = view.findViewById(R.id.action_cancel);
+        mActionOk = view.findViewById(R.id.action_ok);
+        mInput = view.findViewById(R.id.input);
+
         mActionCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

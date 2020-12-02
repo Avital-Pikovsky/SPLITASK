@@ -2,6 +2,7 @@ package Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,8 +25,8 @@ public class clickedJoinedList extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User lists");
-    private TextView freindListName;
+    private final DatabaseReference databaseReference = firebaseDatabase.getReference();
+    private TextView JoinedListName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +53,23 @@ public class clickedJoinedList extends AppCompatActivity {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
+            public void onDataChange(@NonNull DataSnapshot allDB) {
+                for (DataSnapshot user : allDB.getChildren()) {
+                    for (DataSnapshot userLists : user.child("Created lists").getChildren()) {
+                        ListAdapter LA = userLists.getValue(ListAdapter.class);
+
+                        if (keyNumber == LA.getId()) {
+                            JoinedListName.setText(LA.getName());
+                            for (int j = 0; j < LA.getList().size(); j++) {
+                                clickedList.add((LA.getList().get(j)));
+                            }
+                            arrayAdapter.notifyDataSetChanged();
+                        }
+                        arrayAdapter.notifyDataSetChanged();
 
                     }
                 }
-
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -67,6 +79,6 @@ public class clickedJoinedList extends AppCompatActivity {
     }
 
     private void setupUI() {
-        freindListName = (TextView) findViewById(R.id.freindListName);
+        JoinedListName = (TextView) findViewById(R.id.freindListName);
     }
 }
