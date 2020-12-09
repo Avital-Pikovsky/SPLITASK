@@ -53,13 +53,6 @@ public class JoinedLists extends Activity implements View.OnClickListener,
 
 
 
-    //    adapter = new JoinedLists.MyAdapter();
-
-//        ListView listView = (ListView) findViewById(R.id.list);
-//        listView.setAdapter(adapter);
-//        listView.setOnItemLongClickListener(this);
-
-
         final ListView list = findViewById(R.id.list);
         ArrayList<String> friendListHistory = new ArrayList<>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friendListHistory);
