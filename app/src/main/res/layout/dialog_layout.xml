@@ -7,49 +7,54 @@
     android:layout_height="match_parent">
 
 
-    <EditText
-        android:id="@+id/edit_box"
-        android:layout_width="275dp"
-        android:layout_height="280dp"
-        android:layout_marginStart="68dp"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41"
-        tools:text="Click to add an item to the list" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_box"
-        app:layout_constraintTop_toTopOf="@+id/edit_box"
-        app:layout_constraintVertical_bias="0.496"
-        tools:layout_editor_absoluteX="68dp" />
+        android:layout_height="200dp"
+        android:padding="10dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="49dp">
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="402dp"
+            android:layout_height="53dp"
+            android:text="ADD ITEM "
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edit_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="68dp"
+            android:hint="enter item " />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/button_ok"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="48dp"
-        android:layout_weight="1"
         android:text="OK"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.931" />
 
     <Button
         android:id="@+id/button_cancel"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="48dp"
-        android:layout_weight="1"
         android:text="CANCEL"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.931" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

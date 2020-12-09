@@ -52,8 +52,6 @@ public class addNewList extends Activity implements OnClickListener,
         listView.setOnItemLongClickListener(this);
 
         findViewById(R.id.button).setOnClickListener(new OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
                 dialog = new Dialog(addNewList.this);

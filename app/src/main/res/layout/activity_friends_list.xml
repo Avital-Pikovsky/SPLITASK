@@ -8,14 +8,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="311dp"
-        android:layout_height="228dp"
+        android:layout_width="300dp"
+        android:layout_height="458dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526">
+        app:layout_constraintVertical_bias="0.389">
 
         <ListView
             android:id="@+id/list"
@@ -82,18 +83,18 @@
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@android:drawable/ic_popup_sync" />
 
-    <TextView
-        android:id="@+id/input_display"
-        android:layout_width="216dp"
-        android:layout_height="106dp"
-        android:layout_below="@+id/join"
-        android:layout_centerHorizontal="true"
-        android:textColor="#000"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192" />
+<!--    <TextView-->
+<!--        android:id="@+id/input_display"-->
+<!--        android:layout_width="216dp"-->
+<!--        android:layout_height="106dp"-->
+<!--        android:layout_below="@+id/join"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:textColor="#000"-->
+<!--        android:textSize="15sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.421"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.192" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

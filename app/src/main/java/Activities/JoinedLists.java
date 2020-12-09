@@ -3,12 +3,17 @@ package Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,24 +31,34 @@ import Adapters.JoinedListAdapter;
 import Adapters.ListAdapter;
 
 
-public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.OnInputListener {
+public class JoinedLists extends Activity implements View.OnClickListener,
+        AdapterView.OnItemLongClickListener {
 
-    private static final String TAG = "JoinedLists";
 
-    private TextView returnBack, joinList;
+   private Dialog dialog;
+
+    private TextView returnBack;
     private ImageButton Refresh;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference();
     private DatabaseReference JoinedListsRef = databaseReference.child(firebaseAuth.getUid()).child("Joined lists");
-    public TextView mInputDisplay;
-    public String keyInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
         setupUI();
+
+
+
+    //    adapter = new JoinedLists.MyAdapter();
+
+//        ListView listView = (ListView) findViewById(R.id.list);
+//        listView.setAdapter(adapter);
+//        listView.setOnItemLongClickListener(this);
+
 
         final ListView list = findViewById(R.id.list);
         ArrayList<String> friendListHistory = new ArrayList<>();
@@ -70,24 +85,19 @@ public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.
             }
         });
 
-        //The user put unique ID, probably through some kind of simple dialog.
-        //This ID got searched in the whole DB and the right list added to the friendListHistory list.
-        joinList.setOnClickListener(new View.OnClickListener() {
-            @Override
+        findViewById(R.id.join).setOnClickListener(new View.OnClickListener() {
+              @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: opening dialog.");
-                AddIdOfListDialog dialog = new AddIdOfListDialog();
-                dialog.show(getFragmentManager(), "AddIdOfListDialog");
-
-                friendListHistory.add(keyInput);
-                //need to find the list by ID
-                //and add it to the person calling
-                JoinedListAdapter JLA = new JoinedListAdapter(keyInput);
-                DatabaseReference newListRef = JoinedListsRef.push();
-                newListRef.setValue(JLA);
-
+                dialog = new Dialog(JoinedLists.this);
+                dialog.setContentView(R.layout.layout_goin_list);
+                dialog.findViewById(R.id.action_cancel).setOnClickListener(
+                        JoinedLists.this);
+                dialog.findViewById(R.id.action_ok).setOnClickListener(
+                        JoinedLists.this);
+                dialog.show();
             }
         });
+
 
         //Restarts the page to load list from DB.
         Refresh.setOnClickListener(new View.OnClickListener() {
@@ -142,14 +152,33 @@ public class JoinedLists extends AppCompatActivity implements AddIdOfListDialog.
     private void setupUI() {
 
         returnBack = (TextView) findViewById(R.id.returnK);
-        joinList = (TextView) findViewById(R.id.join);
         Refresh = (ImageButton) findViewById(R.id.ref);
-        mInputDisplay = findViewById(R.id.input_display);
     }
 
     @Override
-    public void sendInput(String input) {
-        Log.d(TAG, "sendInput: got the input: " + input);
-//        mInputDisplay.setText(input);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.action_cancel:
+                dialog.dismiss();
+                break;
+
+            case R.id.action_ok:
+                String text = ((EditText) dialog.findViewById(R.id.input))
+                        .getText().toString();
+                if (null != text && 0 != text.compareTo("")) {
+                    JoinedListAdapter JLA = new JoinedListAdapter(text);
+               DatabaseReference newListRef = JoinedListsRef.push();
+                newListRef.setValue(JLA);
+                    dialog.dismiss();
+
+                }
+                break;
+        }
     }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        return false;
+    }
+
 }
