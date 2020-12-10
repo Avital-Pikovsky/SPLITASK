@@ -52,6 +52,8 @@ public class UpdateProfile extends AppCompatActivity {
 
             }
         });
+
+        //update the user profile in the db.
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -31,7 +31,7 @@ public class clickedJoinedList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clicked_friend_lists);
+        setContentView(R.layout.activity_clicked_joined_lists);
         setupUI();
 
         String key = getIntent().getExtras().getString("listKey");

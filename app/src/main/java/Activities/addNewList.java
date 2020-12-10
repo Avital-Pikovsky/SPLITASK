@@ -34,7 +34,10 @@ public class addNewList extends Activity implements OnClickListener,
     private EditText listName;
     private Button save;
 
+    //Auto functions
     private FirebaseAuth firebaseAuth;
+
+    //The data base itself
     private FirebaseDatabase firebaseDatabase;
 
 
@@ -42,15 +45,20 @@ public class addNewList extends Activity implements OnClickListener,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_list);
+
+        //Connecting akk the buttons to the xml by id
         setupUI();
 
         datasource = new ArrayList<String>();
         adapter = new MyAdapter();
 
+
+        //creating a list with Adapter
         ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
         listView.setOnItemLongClickListener(this);
 
+        //Listener to the 'JOIN' button, open a dialog when clicked
         findViewById(R.id.button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +72,7 @@ public class addNewList extends Activity implements OnClickListener,
             }
         });
 
+        //saving a list and add it to the database.
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +85,7 @@ public class addNewList extends Activity implements OnClickListener,
     }
 
     //this functions adds the new added list to the database,
-//under the person who created it.
+    //under the person who created it.
     public void addListToDB(String name, ArrayList<String> addedList) {
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -89,6 +98,7 @@ public class addNewList extends Activity implements OnClickListener,
 
     }
 
+    //the dialog options, get the input from the user.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -120,7 +130,7 @@ public class addNewList extends Activity implements OnClickListener,
         adapter.notifyDataSetChanged();
         return true;
     }
-
+//Adapter for the list
     private class MyAdapter extends BaseAdapter {
 
         @Override

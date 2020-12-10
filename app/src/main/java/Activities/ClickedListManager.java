@@ -28,6 +28,9 @@ public class ClickedListManager extends AppCompatActivity {
     private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("Created lists");
     private TextView listName;
 
+
+    //This Activity is a dynamic activity.
+    //It contains a List, and fill it by the current list that have been clicked in the previous page.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class ClickedListManager extends AppCompatActivity {
             }
         });
 
+        //Looking for a match up between a list and the key.
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

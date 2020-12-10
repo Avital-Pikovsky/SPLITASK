@@ -1,7 +1,6 @@
 package Activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -14,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,21 +36,18 @@ public class JoinedLists extends Activity implements View.OnClickListener,
    private Dialog dialog;
 
     private TextView returnBack;
-    private ImageButton Refresh;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference();
     private DatabaseReference JoinedListsRef = databaseReference.child(firebaseAuth.getUid()).child("Joined lists");
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_list);
+        setContentView(R.layout.activity_joined_list);
         setupUI();
 
-
-
+        //Creating a Linear view List to be shown in this activity.
         final ListView list = findViewById(R.id.list);
         ArrayList<String> friendListHistory = new ArrayList<>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friendListHistory);
@@ -91,15 +86,6 @@ public class JoinedLists extends Activity implements View.OnClickListener,
             }
         });
 
-
-        //Restarts the page to load list from DB.
-        Refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
-            }
-        });
 
         //looping on ALL the database looking for list that the user is part of.
         JoinedListsRef.addValueEventListener(new ValueEventListener() {
@@ -145,9 +131,8 @@ public class JoinedLists extends Activity implements View.OnClickListener,
     private void setupUI() {
 
         returnBack = (TextView) findViewById(R.id.returnK);
-        Refresh = (ImageButton) findViewById(R.id.ref);
     }
-
+    //This is the dialog
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

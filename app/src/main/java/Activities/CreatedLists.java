@@ -33,14 +33,17 @@ public class CreatedLists extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_lists);
+        setContentView(R.layout.activity_created_lists);
         setupUI();
 
+
+        //Creating a Linear view List to be shown in this activity.
         final ListView list = findViewById(R.id.list);
         ArrayList<String> listHistory = new ArrayList<>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listHistory);
         list.setAdapter(arrayAdapter);
 
+        //When item get clicked, move its key to the next page.
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,6 +82,7 @@ public class CreatedLists extends AppCompatActivity {
             }
         });
 
+        //fill the list from the database, with id.
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
