@@ -135,19 +135,16 @@ public class addNewList extends Activity implements OnClickListener,
 
         @Override
         public int getCount() {
-            // TODO Auto-generated method stub
             return datasource.size();
         }
 
         @Override
         public Object getItem(int position) {
-            // TODO Auto-generated method stub
             return datasource.get(position);
         }
 
         @Override
         public long getItemId(int position) {
-            // TODO Auto-generated method stub
             return position;
         }
 
