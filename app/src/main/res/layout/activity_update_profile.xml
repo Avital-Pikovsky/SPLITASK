@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context="Activities.UpdateProfile">
 
+    <include
+        layout="@layout/app_bar"
+        android:id="@+id/app_bar">
+    </include>
+
     <ImageView
         android:id="@+id/ivProfileUpdate"
         android:layout_width="110dp"
@@ -76,5 +81,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhoneUpdate" />
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneUpdate"
+        android:background="#bdbdbd"
+        android:textColor="@color/white"
+
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

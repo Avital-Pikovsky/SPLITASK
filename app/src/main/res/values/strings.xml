@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">SpliTask</string>
+    <string name="profile_name">My Profile</string>
+    <string name="my_lists_name">My Lists</string>
+    <string name="friends_lists_name">Friends Lists</string>
+    <string name="contact_name">Contact Us</string>
+    <string name="out_name">Sign Out</string>
+
 
 </resources>

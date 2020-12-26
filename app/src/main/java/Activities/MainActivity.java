@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         setupUI();
 
     firebaseAuth = FirebaseAuth.getInstance();
@@ -73,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     private void setupUI(){
         userEmail = (EditText) findViewById(R.id.mainUserEmail);
         userPassword = (EditText) findViewById(R.id.mainUserPassword);

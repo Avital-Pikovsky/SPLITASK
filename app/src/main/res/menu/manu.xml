@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/profile"
+        android:title="@string/profile_name"
+        app:showAsAction="never">
+    </item>
+    <item android:id="@+id/my_lists"
+        android:title="@string/my_lists_name"
+        app:showAsAction="never">
+    </item>
+    <item android:id="@+id/friends_lists"
+        android:title="@string/friends_lists_name"
+        app:showAsAction="never">
+    </item>
+    <item android:id="@+id/contact"
+        android:title="@string/contact_name"
+        app:showAsAction="never">
+    </item>
+    <item android:id="@+id/out"
+        android:title="@string/out_name"
+        app:showAsAction="never">
+    </item>
+
+</menu>

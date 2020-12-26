@@ -1,12 +1,19 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.AdapterView;
@@ -29,7 +36,7 @@ import Adapters.JoinedListAdapter;
 import Adapters.ListAdapter;
 
 
-public class JoinedLists extends Activity implements View.OnClickListener,
+public class JoinedLists extends AppCompatActivity implements View.OnClickListener,
         AdapterView.OnItemLongClickListener {
 
 
@@ -45,7 +52,13 @@ public class JoinedLists extends Activity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joined_list);
+
         setupUI();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         //Creating a Linear view List to be shown in this activity.
         final ListView list = findViewById(R.id.list);
@@ -126,6 +139,37 @@ public class JoinedLists extends Activity implements View.OnClickListener,
 
 
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.manu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.profile:
+                startActivity(new Intent(this, myProfile.class));
+                break;
+            case R.id.my_lists:
+                startActivity(new Intent(this, CreatedLists.class));
+                break;
+            case R.id.friends_lists:
+                startActivity(new Intent(this, JoinedLists.class));
+                break;
+            case R.id.contact:
+                startActivity(new Intent(this, contactUs.class));
+                break;
+            case R.id.out:
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+            default:
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupUI() {

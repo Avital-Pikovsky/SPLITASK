@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context="Activities.JoinedLists">
 
+    <include
+        layout="@layout/app_bar"
+        android:id="@+id/app_bar">
+    </include>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="300dp"
@@ -16,13 +21,13 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389">
+        app:layout_constraintVertical_bias="0.571">
 
         <ListView
             android:id="@+id/list"
-            android:textSize="28sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="28sp" />
 
 
     </LinearLayout>
@@ -54,7 +59,11 @@
         app:layout_constraintHorizontal_bias="0.591"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintVertical_bias="0.024"
+        android:background="#bdbdbd"
+        android:textColor="@color/white"
+
+        />
 
     <ImageView
         android:id="@+id/listPic"

@@ -2,6 +2,9 @@ package Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +20,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +53,8 @@ public class addNewList extends Activity implements OnClickListener,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_list);
+
+        setupUI();
 
         //Connecting akk the buttons to the xml by id
         setupUI();
@@ -84,6 +94,7 @@ public class addNewList extends Activity implements OnClickListener,
         });
     }
 
+
     //this functions adds the new added list to the database,
     //under the person who created it.
     public void addListToDB(String name, ArrayList<String> addedList) {
@@ -117,6 +128,7 @@ public class addNewList extends Activity implements OnClickListener,
                 break;
         }
     }
+
 
     private void setupUI() {
         listName = (EditText) findViewById(R.id.listname);
