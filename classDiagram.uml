@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Adapters.Admin</OriginalElement>
+  <nodes>
+    <node x="0.0" y="504.0">Activities.contactUs</node>
+    <node x="1285.5" y="493.0">Activities.MainActivity</node>
+    <node x="679.1321614583335" y="0.0">Adapters.ListAdapter</node>
+    <node x="1767.2447916666667" y="662.0">Activities.UpdatePassword</node>
+    <node x="843.1197916666667" y="504.0">Activities.CreatedLists</node>
+    <node x="800.6197916666667" y="662.0">Activities.LoggedInProfile</node>
+    <node x="1621.9947916666667" y="798.0">Activities.myProfile</node>
+    <node x="933.2447916666667" y="312.0">Activities.ClickedListManager</node>
+    <node x="186.0" y="482.0">Activities.JoinedLists</node>
+    <node x="1374.2447916666667" y="312.0">Activities.ForgotPassword</node>
+    <node x="552.2447916666667" y="279.0">Activities.addNewList</node>
+    <node x="1662.3821614583335" y="22.0">Adapters.UserProfile</node>
+    <node x="1724.2708333333335" y="924.0">Activities.UpdateProfile</node>
+    <node x="143.24479166666674" y="312.0">Adapters.JoinedListAdapter</node>
+    <node x="1146.2447916666667" y="290.0">Activities.RegistrationActivity</node>
+    <node x="347.24479166666674" y="312.0">Activities.clickedJoinedList</node>
+    <node x="1560.2447916666667" y="268.0">Adapters.Admin</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Activities.myProfile" target="Adapters.UserProfile">
+      <point x="13.833333333333258" y="-38.0" />
+      <point x="1718.828125" y="758.0" />
+      <point x="1756.7447916666667" y="758.0" />
+      <point x="1756.7447916666667" y="248.0" />
+      <point x="1770.8821614583335" y="248.0" />
+      <point x="15.5" y="82.0" />
+    </edge>
+    <edge source="Activities.CreatedLists" target="Activities.addNewList">
+      <point x="-62.25" y="-38.0" />
+      <point x="863.8697916666667" y="462.0" />
+      <point x="642.4947916666667" y="462.0" />
+      <point x="-90.25" y="71.0" />
+    </edge>
+    <edge source="Activities.LoggedInProfile" target="Activities.myProfile">
+      <point x="42.0" y="38.0" />
+      <point x="926.6197916666667" y="768.0" />
+      <point x="1663.4947916666667" y="768.0" />
+      <point x="-41.5" y="-38.0" />
+    </edge>
+    <edge source="Activities.myProfile" target="Adapters.Admin">
+      <point x="-13.833333333333258" y="-38.0" />
+      <point x="1691.1614583333335" y="758.0" />
+      <point x="1653.2447916666667" y="758.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="Activities.LoggedInProfile" target="Activities.CreatedLists">
+      <point x="1.1368683772161603E-13" y="-38.0" />
+      <point x="-41.5" y="38.0" />
+    </edge>
+    <edge source="Activities.LoggedInProfile" target="Activities.MainActivity">
+      <point x="48.000000000000114" y="-38.0" />
+      <point x="932.6197916666669" y="632.0" />
+      <point x="1331.5" y="632.0" />
+      <point x="-46.0" y="49.0" />
+    </edge>
+    <edge source="Activities.LoggedInProfile" target="Activities.JoinedLists">
+      <point x="-47.999999999999886" y="-38.0" />
+      <point x="836.6197916666669" y="632.0" />
+      <point x="276.25" y="632.0" />
+      <point x="-90.25" y="60.0" />
+    </edge>
+    <edge source="Activities.myProfile" target="Activities.UpdateProfile">
+      <point x="41.5" y="38.0" />
+      <point x="1746.4947916666667" y="894.0" />
+      <point x="1786.5208333333335" y="894.0" />
+      <point x="-20.75" y="-38.0" />
+    </edge>
+    <edge source="Activities.MainActivity" target="Activities.ForgotPassword">
+      <point x="23.0" y="-49.0" />
+      <point x="1400.5" y="462.0" />
+      <point x="1415.7447916666667" y="462.0" />
+      <point x="-41.5" y="38.0" />
+    </edge>
+    <edge source="Activities.CreatedLists" target="Adapters.ListAdapter">
+      <point x="62.25" y="-38.0" />
+      <point x="988.3697916666667" y="462.0" />
+      <point x="1135.7447916666667" y="462.0" />
+      <point x="1135.7447916666667" y="238.0" />
+      <point x="869.7988281250001" y="238.0" />
+      <point x="86.66666666666663" y="104.0" />
+    </edge>
+    <edge source="Activities.ClickedListManager" target="Adapters.ListAdapter">
+      <point x="0.0" y="-38.0" />
+      <point x="1029.2447916666667" y="248.0" />
+      <point x="835.1321614583335" y="248.0" />
+      <point x="52.0" y="104.0" />
+    </edge>
+    <edge source="Activities.JoinedLists" target="Activities.LoggedInProfile">
+      <point x="90.25" y="60.0" />
+      <point x="456.75" y="622.0" />
+      <point x="860.6197916666669" y="622.0" />
+      <point x="-23.999999999999886" y="-38.0" />
+    </edge>
+    <edge source="Activities.JoinedLists" target="Adapters.JoinedListAdapter">
+      <point x="-135.3749999999999" y="-60.0" />
+      <point x="231.125" y="462.0" />
+      <point x="189.24479166666674" y="462.0" />
+      <point x="-46.0" y="38.0" />
+    </edge>
+    <edge source="Activities.addNewList" target="Adapters.ListAdapter">
+      <point x="-90.25" y="-71.0" />
+      <point x="642.4947916666667" y="248.0" />
+      <point x="765.7988281250001" y="248.0" />
+      <point x="-17.33333333333337" y="104.0" />
+    </edge>
+    <edge source="Activities.MainActivity" target="Activities.LoggedInProfile">
+      <point x="46.0" y="49.0" />
+      <point x="1423.5" y="642.0" />
+      <point x="956.6197916666669" y="642.0" />
+      <point x="72.00000000000011" y="-38.0" />
+    </edge>
+    <edge source="Activities.RegistrationActivity" target="Activities.MainActivity">
+      <point x="52.0" y="60.0" />
+      <point x="1302.2447916666667" y="452.0" />
+      <point x="1354.5" y="452.0" />
+      <point x="-23.0" y="-49.0" />
+    </edge>
+    <edge source="Activities.UpdateProfile" target="Adapters.UserProfile">
+      <point x="62.25" y="-38.0" />
+      <point x="1869.5208333333335" y="904.0" />
+      <point x="1954.7447916666667" y="904.0" />
+      <point x="1954.7447916666667" y="238.0" />
+      <point x="1832.8821614583335" y="238.0" />
+      <point x="77.5" y="82.0" />
+    </edge>
+    <edge source="Activities.ForgotPassword" target="Activities.MainActivity">
+      <point x="41.5" y="38.0" />
+      <point x="1498.7447916666667" y="462.0" />
+      <point x="1446.5" y="462.0" />
+      <point x="69.0" y="-49.0" />
+    </edge>
+    <edge source="Activities.LoggedInProfile" target="Activities.contactUs">
+      <point x="-71.99999999999989" y="-38.0" />
+      <point x="812.6197916666669" y="642.0" />
+      <point x="83.0" y="642.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="Activities.myProfile" target="Activities.UpdatePassword">
+      <point x="41.5" y="-38.0" />
+      <point x="1746.4947916666667" y="768.0" />
+      <point x="1808.7447916666667" y="768.0" />
+      <point x="-41.5" y="38.0" />
+    </edge>
+    <edge source="Activities.CreatedLists" target="Activities.LoggedInProfile">
+      <point x="41.5" y="38.0" />
+      <point x="967.6197916666667" y="622.0" />
+      <point x="908.6197916666669" y="622.0" />
+      <point x="24.000000000000114" y="-38.0" />
+    </edge>
+    <edge source="Activities.addNewList" target="Activities.CreatedLists">
+      <point x="90.25" y="71.0" />
+      <point x="822.9947916666667" y="452.0" />
+      <point x="905.3697916666667" y="452.0" />
+      <point x="-20.75" y="-38.0" />
+    </edge>
+    <edge source="Activities.clickedJoinedList" target="Adapters.ListAdapter">
+      <point x="0.0" y="-38.0" />
+      <point x="439.24479166666674" y="228.0" />
+      <point x="696.4654947916669" y="228.0" />
+      <point x="-86.66666666666663" y="104.0" />
+    </edge>
+    <edge source="Activities.UpdateProfile" target="Activities.myProfile">
+      <point x="-62.25" y="-38.0" />
+      <point x="1745.0208333333335" y="904.0" />
+      <point x="1663.4947916666667" y="904.0" />
+      <point x="-41.5" y="38.0" />
+    </edge>
+    <edge source="Activities.MainActivity" target="Activities.RegistrationActivity">
+      <point x="-69.0" y="-49.0" />
+      <point x="1308.5" y="462.0" />
+      <point x="1198.2447916666667" y="462.0" />
+      <point x="-52.0" y="60.0" />
+    </edge>
+    <edge source="Activities.myProfile" target="Activities.LoggedInProfile">
+      <point x="-69.16666666666674" y="-38.0" />
+      <point x="1635.828125" y="778.0" />
+      <point x="842.6197916666667" y="778.0" />
+      <point x="-42.0" y="38.0" />
+    </edge>
+    <edge source="Activities.CreatedLists" target="Activities.ClickedListManager">
+      <point x="20.75" y="-38.0" />
+      <point x="946.8697916666667" y="452.0" />
+      <point x="1029.2447916666667" y="452.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="Activities.UpdatePassword" target="Activities.myProfile">
+      <point x="41.5" y="38.0" />
+      <point x="1891.7447916666667" y="778.0" />
+      <point x="1774.1614583333335" y="778.0" />
+      <point x="69.16666666666674" y="-38.0" />
+    </edge>
+    <edge source="Adapters.Admin" target="Adapters.UserProfile">
+      <point x="0.0" y="-82.0" />
+      <point x="1653.2447916666667" y="248.0" />
+      <point x="1739.8821614583335" y="248.0" />
+      <point x="-15.5" y="82.0" />
+    </edge>
+    <edge source="Activities.JoinedLists" target="Adapters.ListAdapter">
+      <point x="135.3750000000001" y="-60.0" />
+      <point x="501.8750000000001" y="462.0" />
+      <point x="541.7447916666667" y="462.0" />
+      <point x="541.7447916666667" y="238.0" />
+      <point x="731.1321614583335" y="238.0" />
+      <point x="-52.0" y="104.0" />
+    </edge>
+    <edge source="Activities.JoinedLists" target="Activities.clickedJoinedList">
+      <point x="45.125000000000114" y="-60.0" />
+      <point x="411.6250000000001" y="462.0" />
+      <point x="439.24479166666674" y="462.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="Activities.RegistrationActivity" target="Adapters.UserProfile">
+      <point x="-52.0" y="-60.0" />
+      <point x="1198.2447916666667" y="228.0" />
+      <point x="1677.8821614583335" y="228.0" />
+      <point x="-77.5" y="82.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.40000000000000013" x="1241.9999999999995" y="459.4999999999998" />
+  <SelectedNodes>
+    <node>Adapters.JoinedListAdapter</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

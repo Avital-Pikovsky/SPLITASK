@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import Adapters.Admin;
 import Adapters.UserProfile;
 
 public class myProfile extends AppCompatActivity {
