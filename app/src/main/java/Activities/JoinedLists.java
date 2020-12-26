@@ -42,7 +42,6 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
 
    private Dialog dialog;
 
-    private TextView returnBack;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -52,8 +51,6 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joined_list);
-
-        setupUI();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -78,13 +75,6 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        returnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(new Intent(JoinedLists.this, LoggedInProfile.class));
-            }
-        });
 
         findViewById(R.id.join).setOnClickListener(new View.OnClickListener() {
               @Override
@@ -172,10 +162,6 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupUI() {
-
-        returnBack = (TextView) findViewById(R.id.returnK);
-    }
     //This is the dialog
     @Override
     public void onClick(View v) {

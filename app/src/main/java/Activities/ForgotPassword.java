@@ -24,7 +24,6 @@ public class ForgotPassword extends AppCompatActivity {
 
     private EditText passwordEmail;
     private Button resetPassword;
-    private TextView returnKey;
 
     private FirebaseAuth firebaseAuth;
 
@@ -61,18 +60,11 @@ public class ForgotPassword extends AppCompatActivity {
                 }
             }
         });
-        returnKey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(new Intent(ForgotPassword.this, MainActivity.class));
-            }
-        });
+
     }
 
     private void setupUI() {
         passwordEmail = (EditText) findViewById(R.id.passwordEmail);
         resetPassword = (Button) findViewById(R.id.btnPasswordReset);
-        returnKey = (TextView) findViewById(R.id.returnButton);
     }
 }

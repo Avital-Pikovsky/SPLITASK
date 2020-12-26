@@ -21,7 +21,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.571">
+        app:layout_constraintVertical_bias="0.794">
 
         <ListView
             android:id="@+id/list"
@@ -32,26 +32,15 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/returnK"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.951"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
     <Button
         android:id="@+id/join"
         android:layout_width="171dp"
         android:layout_height="66dp"
+        android:background="#bdbdbd"
         android:fontFamily="sans-serif-black"
-        android:text="+ Add A List"
+        android:text="Join to a  List"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
         android:textColorLink="#03A9F4"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,9 +48,7 @@
         app:layout_constraintHorizontal_bias="0.591"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
-        android:background="#bdbdbd"
-        android:textColor="@color/white"
+        app:layout_constraintVertical_bias="0.139"
 
         />
 
@@ -75,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037"
+        app:layout_constraintVertical_bias="0.147"
         app:srcCompat="?attr/actionModePasteDrawable"
         app:tint="#041B2E" />
 

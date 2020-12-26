@@ -29,7 +29,7 @@ import Adapters.UserProfile;
 public class myProfile extends AppCompatActivity {
 
     private ImageView profilePic;
-    private TextView returnBack, profileName, profileEmail, profilePhone;
+    private TextView profileName, profileEmail, profilePhone;
     private Button profileUpdate, changePassword;
 
     private FirebaseAuth firebaseAuth;
@@ -78,12 +78,6 @@ public class myProfile extends AppCompatActivity {
             }
         });
 
-        returnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(myProfile.this, LoggedInProfile.class));
-            }
-        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,7 +109,6 @@ public class myProfile extends AppCompatActivity {
     }
     private void setupUI() {
 
-        returnBack = (TextView) findViewById(R.id.returnTextView);
         profilePic = (ImageView) findViewById(R.id.tvProfilePic);
         profileName = (TextView) findViewById(R.id.tvProfileName);
         profileEmail = (TextView) findViewById(R.id.tvProfileEmail);

@@ -29,8 +29,7 @@ import java.util.ArrayList;
 import Adapters.ListAdapter;
 
 public class CreatedLists extends AppCompatActivity {
-    private TextView returnBack, addList;
-    private ImageButton Refresh;
+    private TextView addList;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("Created lists");
@@ -62,24 +61,6 @@ public class CreatedLists extends AppCompatActivity {
                 Intent i = new Intent(CreatedLists.this, ClickedListManager.class);
                 i.putExtra("listKey", key);
                 startActivity(i);
-            }
-        });
-
-        //Restarts the page to load list from DB.
-        Refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
-
-            }
-        });
-
-        returnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(CreatedLists.this, LoggedInProfile.class));
             }
         });
 
@@ -143,9 +124,7 @@ public class CreatedLists extends AppCompatActivity {
     }
 
     private void setupUI() {
-        returnBack = (TextView) findViewById(R.id.returnBackKey);
         addList = (TextView) findViewById(R.id.addList);
-        Refresh = (ImageButton) findViewById(R.id.refresh);
 
     }
 
