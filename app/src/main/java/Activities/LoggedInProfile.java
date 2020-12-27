@@ -21,8 +21,6 @@ public class LoggedInProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
         setupUI();
 
         myProfile.setOnClickListener(new View.OnClickListener() {
@@ -64,36 +62,6 @@ public class LoggedInProfile extends AppCompatActivity {
 
 
 
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.manu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.profile:
-                startActivity(new Intent(this, myProfile.class));
-                break;
-            case R.id.my_lists:
-                startActivity(new Intent(this, CreatedLists.class));
-                break;
-            case R.id.friends_lists:
-                startActivity(new Intent(this, JoinedLists.class));
-                break;
-            case R.id.contact:
-                startActivity(new Intent(this, contactUs.class));
-                break;
-            case R.id.out:
-                startActivity(new Intent(this, MainActivity.class));
-                break;
-            default:
-
-        }
-        return super.onOptionsItemSelected(item);
     }
     private void setupUI(){
         myProfile = (TextView) findViewById(R.id.myPro);

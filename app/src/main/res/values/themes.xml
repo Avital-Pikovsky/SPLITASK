@@ -16,6 +16,7 @@
         <!-- Customize your theme here. -->
     <style name="CustomToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name = "android:background">@color/colorPrimary</item>
+
     </style>
 
     <style name="Theme.DuckLuck.NoActionBar">
