@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.123"
-        tools:srcCompat="@drawable/user" />
+        app:srcCompat="@drawable/user" />
 
     <EditText
         android:id="@+id/etNameUpdate"
@@ -86,4 +86,15 @@
         android:textColor="@color/white"
 
         />
+
+    <Button
+        android:id="@+id/upload_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload picture"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/app_bar"
+        app:layout_constraintVertical_bias="0.273" />
 </androidx.constraintlayout.widget.ConstraintLayout>
