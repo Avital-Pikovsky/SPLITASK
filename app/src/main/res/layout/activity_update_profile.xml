@@ -7,47 +7,50 @@
     tools:context="Activities.UpdateProfile">
 
     <include
-        layout="@layout/app_bar"
-        android:id="@+id/app_bar">
-    </include>
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"></include>
 
-    <ImageView
-        android:id="@+id/ivProfileUpdate"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
         android:layout_width="110dp"
         android:layout_height="110dp"
+        android:visibility="visible"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.123"
-        tools:srcCompat="@drawable/user" />
+        app:layout_constraintVertical_bias="0.136"
+        android:src="@drawable/user"
+        tools:visibility="visible" />
+
 
     <EditText
         android:id="@+id/etNameUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="404dp"
         android:ems="10"
-        android:hint="Name"
-        android:textSize="28sp"
         android:gravity="center"
+        android:hint="Name"
         android:inputType="textPersonName"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfileUpdate"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        app:layout_constraintVertical_bias="0.767" />
 
     <EditText
         android:id="@+id/etEmailUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Email"
-        android:textSize="28sp"
         android:gravity="center"
+        android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -60,10 +63,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Phone Number"
-        android:textSize="28sp"
         android:gravity="center"
+        android:hint="Phone Number"
         android:inputType="phone"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -75,15 +78,29 @@
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#bdbdbd"
         android:gravity="center"
-        android:text="Save"
+        android:text="Change"
+        android:textColor="@color/white"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPhoneUpdate"
-        android:background="#bdbdbd"
-        android:textColor="@color/white"
 
         />
+
+    <TextView
+        android:id="@+id/changePic"
+        android:layout_width="114dp"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:text="Change picture"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etNameUpdate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

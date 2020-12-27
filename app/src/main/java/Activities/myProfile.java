@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,24 +19,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.squareup.picasso.Picasso;
 
 import Adapters.Admin;
 import Adapters.UserProfile;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class myProfile extends AppCompatActivity {
 
-    private ImageView profilePic;
+    private CircleImageView profileImage;
     private TextView profileName, profileEmail, profilePhone;
     private Button profileUpdate, changePassword;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
+
+    private DatabaseReference databaseReference;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +61,7 @@ public class myProfile extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-
-        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
+        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,7 +91,42 @@ public class myProfile extends AppCompatActivity {
             }
         });
 
+        getUserinfo();
+
     }
+    private void getUserinfo() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                StorageReference imagesRef = storageRef.child("Profiles/" + firebaseAuth.getUid());
+
+                final long ONE_MEGABYTE = 1024 * 1024;
+                imagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        profileImage.setImageBitmap(bitmap);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(myProfile.this, error.getCode(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -109,7 +157,7 @@ public class myProfile extends AppCompatActivity {
     }
     private void setupUI() {
 
-        profilePic = (ImageView) findViewById(R.id.tvProfilePic);
+        profileImage = (CircleImageView) findViewById(R.id.profile_pic);
         profileName = (TextView) findViewById(R.id.tvProfileName);
         profileEmail = (TextView) findViewById(R.id.tvProfileEmail);
         profilePhone = (TextView) findViewById(R.id.tvProfilePhone);

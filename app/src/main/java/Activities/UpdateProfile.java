@@ -1,11 +1,16 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,23 +18,46 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+
+import java.util.HashMap;
 
 import Adapters.UserProfile;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UpdateProfile extends AppCompatActivity {
+    private CircleImageView profileImageView;
+    private TextView profileChangeBtn;
 
     private EditText newUserName, newUserEmail, newUserPhone;
     private Button save;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
+
+
+    private DatabaseReference databaseReference;
+    private Uri imageUri;
+    private String myUri = "";
+    private StorageTask uploadTask;
+    private StorageReference storageProfilePicsRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +72,11 @@ public class UpdateProfile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+//        databaseReference = FirebaseDatabase.getInstance().getReference().child("User details");
+        storageProfilePicsRef = FirebaseStorage.getInstance().getReference().child("Profiles/"+firebaseAuth.getUid());
+
+       databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,6 +85,7 @@ public class UpdateProfile extends AppCompatActivity {
                 newUserName.setText(userProfile.getUserName());
                 newUserEmail.setText(userProfile.getUserEmail());
                 newUserPhone.setText(userProfile.getUserPhone());
+
             }
 
             @Override
@@ -66,19 +99,123 @@ public class UpdateProfile extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                uploadProfileImage();
+
                 String name = newUserName.getText().toString();
                 String email = newUserEmail.getText().toString();
                 String phone = newUserPhone.getText().toString();
 
-                UserProfile userProfile = new UserProfile(name, email, phone);
+                    UserProfile userProfile = new UserProfile(name, email, phone);
 
-                databaseReference.child("User details").setValue(userProfile);
+                    databaseReference.child("User details").setValue(userProfile);
 
-                startActivity(new Intent(UpdateProfile.this, myProfile.class));
-                Toast.makeText(UpdateProfile.this, "Changed Successfully!", Toast.LENGTH_SHORT).show();
-                finish();
+                    startActivity(new Intent(UpdateProfile.this, myProfile.class));
+                    Toast.makeText(UpdateProfile.this, "Changed Successfully!", Toast.LENGTH_SHORT).show();
+                    finish();
             }
         });
+
+        profileChangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity().setAspectRatio(1, 1).start(UpdateProfile.this);
+
+            }
+        });
+
+        getUserinfo();
+    }
+    private void getUserinfo() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                StorageReference imagesRef = storageRef.child("Profiles/" + firebaseAuth.getUid());
+
+                final long ONE_MEGABYTE = 1024 * 1024;
+                imagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        profileImageView.setImageBitmap(bitmap);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UpdateProfile.this, error.getCode(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            imageUri = result.getUri();
+
+            profileImageView.setImageURI(imageUri);
+        }
+        else{
+            Toast.makeText(this, "Error, Try again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void uploadProfileImage() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Set your profile");
+        progressDialog.setMessage("Please wait while we are setting your data");
+        progressDialog.show();
+
+        if(imageUri != null){
+
+            uploadTask = storageProfilePicsRef.putFile(imageUri);
+
+            uploadTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+
+                    return storageProfilePicsRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()){
+                        Uri downloadUri = task.getResult();
+                        myUri = downloadUri.toString();
+
+                        HashMap<String, Object> userMap = new HashMap<>();
+                        userMap.put("image", myUri);
+
+                        databaseReference.child(firebaseAuth.getCurrentUser().getUid()).updateChildren(userMap);
+
+                        progressDialog.dismiss();
+                    }
+                }
+            });
+        }
+        else{
+            progressDialog.dismiss();
+            Toast.makeText(this, "Image not selected", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -113,9 +250,12 @@ public class UpdateProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     private void setupUI() {
+        profileImageView = (CircleImageView) findViewById(R.id.profile_image);
         newUserName = (EditText) findViewById(R.id.etNameUpdate);
         newUserEmail = (EditText) findViewById(R.id.etEmailUpdate);
         newUserPhone = (EditText) findViewById(R.id.etPhoneUpdate);
         save = (Button) findViewById(R.id.btnSave);
+        profileChangeBtn = (TextView) findViewById(R.id.changePic);
+
     }
 }
