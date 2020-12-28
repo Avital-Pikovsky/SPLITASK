@@ -47,6 +47,7 @@ package="Activities">
     <activity android:name="Activities.AdminActivity"
         android:parentActivityName=".LoggedInProfile"></activity>
 
+    <activity android:name="Activities.Invite_Search"></activity>
 
 
     <activity android:name="Activities.MainActivity">
@@ -65,9 +66,8 @@ package="Activities">
     <meta-data
         android:name="preloaded_fonts"
         android:resource="@array/preloaded_fonts" />
+
 </application>
 
 </manifest>
-
-
 
