@@ -10,59 +10,61 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar"></include>
 
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="181dp"
+        android:layout_height="174dp"
+        android:src="@drawable/user"
         android:visibility="visible"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136"
-        android:src="@drawable/user"
+        app:layout_constraintVertical_bias="0.1"
         tools:visibility="visible" />
-
 
     <EditText
         android:id="@+id/etNameUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="404dp"
         android:ems="10"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:hint="Name"
         android:inputType="textPersonName"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image"
-        app:layout_constraintVertical_bias="0.767" />
+        app:layout_constraintVertical_bias="0.146" />
 
     <EditText
         android:id="@+id/etEmailUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNameUpdate"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.143" />
 
     <EditText
         android:id="@+id/etPhoneUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:hint="Phone Number"
         android:inputType="phone"
@@ -79,6 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#bdbdbd"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:text="Change"
         android:textColor="@color/white"
@@ -86,14 +89,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhoneUpdate"
 
-        />
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneUpdate" />
 
     <TextView
         android:id="@+id/changePic"
         android:layout_width="114dp"
         android:layout_height="32dp"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:text="Change picture"
         android:textStyle="bold"

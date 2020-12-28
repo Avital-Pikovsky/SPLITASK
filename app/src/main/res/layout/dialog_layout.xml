@@ -19,6 +19,7 @@
             android:id="@+id/heading"
             android:layout_width="402dp"
             android:layout_height="53dp"
+            android:fontFamily="@font/bad_script"
             android:text="ADD ITEM "
             android:textColor="#000"
             android:textSize="18sp" />
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="68dp"
+            android:fontFamily="@font/bad_script"
             android:hint="enter item " />
 
     </RelativeLayout>
@@ -37,32 +39,32 @@
         android:id="@+id/button_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#bdbdbd"
+        android:fontFamily="@font/bad_script"
         android:text="OK"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.863"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.931"
-        android:background="#bdbdbd"
-        android:textColor="@color/white"
 
-        />
+        app:layout_constraintVertical_bias="0.931" />
 
     <Button
         android:id="@+id/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#bdbdbd"
+        android:fontFamily="@font/bad_script"
         android:text="CANCEL"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.225"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.931"
-        android:background="#bdbdbd"
-        android:textColor="@color/white"
 
-        />
+        app:layout_constraintVertical_bias="0.931" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

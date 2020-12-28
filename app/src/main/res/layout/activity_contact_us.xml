@@ -13,55 +13,45 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="369dp"
-        android:layout_height="83dp"
+        android:layout_width="353dp"
+        android:layout_height="150dp"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
-        android:text="If you have any questions we will always be happy to help."
-        android:textSize="28sp"
+        android:textColor="@color/black"
+        android:text="If you have any questions we will always be happy to help. Fill free to contact us by email."
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.066" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="388dp"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="Fill free to contact us by email"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.097" />
 
     <EditText
         android:id="@+id/etOurEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:hint="Splitask2020@gmail.com"
-        android:textSize="28sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/etSubject"
         android:layout_width="404dp"
-        android:layout_height="54dp"
+        android:layout_height="94dp"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
+        android:maxLines="1"
         android:padding="10dp"
         android:text="Subject"
-        android:textSize="20sp"
-        android:maxLines="1"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -73,10 +63,11 @@
         android:id="@+id/etMessage"
         android:layout_width="396dp"
         android:layout_height="156dp"
+        android:fontFamily="@font/bad_script"
         android:gravity="center"
         android:padding="50dp"
         android:text="Message"
-        android:textSize="20sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
@@ -88,17 +79,16 @@
         android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#bdbdbd"
+        android:fontFamily="@font/bad_script"
         android:text="Send"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMessage"
-        app:layout_constraintVertical_bias="0.532"
-        android:background="#bdbdbd"
-        android:textColor="@color/white"
-
-        />
+        app:layout_constraintVertical_bias="0.532" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

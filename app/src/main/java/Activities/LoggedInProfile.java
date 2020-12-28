@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class LoggedInProfile extends AppCompatActivity {
 
-    private TextView myProfile, myHistory, lists, contactUs, signOut;
+    private TextView myProfile, myHistory, lists, contactUs, signOut, adminBtn;
 
 
     @Override
@@ -59,6 +59,13 @@ public class LoggedInProfile extends AppCompatActivity {
                 startActivity(new Intent(LoggedInProfile.this, MainActivity.class));
             }
         });
+        adminBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoggedInProfile.this, AdminActivity.class));
+
+            }
+        });
 
 
 
@@ -69,6 +76,7 @@ public class LoggedInProfile extends AppCompatActivity {
         lists = (TextView) findViewById(R.id.friendsLists);
         contactUs = (TextView) findViewById(R.id.contact);
         signOut = (TextView) findViewById(R.id.signO);
+        adminBtn = (TextView) findViewById(R.id.Admin);
     }
 
 }
