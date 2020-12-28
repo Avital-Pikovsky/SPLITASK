@@ -35,10 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
-import java.util.HashMap;
 
 import Adapters.UserProfile;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -48,14 +46,13 @@ public class UpdateProfile extends AppCompatActivity {
     private TextView profileChangeBtn;
 
     private EditText newUserName, newUserEmail, newUserPhone;
-    private Button save;
+    private Button change;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
 
 
     private DatabaseReference databaseReference;
     private Uri imageUri;
-    private String myUri = "";
     private StorageTask uploadTask;
     private StorageReference storageProfilePicsRef;
 
@@ -73,10 +70,9 @@ public class UpdateProfile extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
 
-//        databaseReference = FirebaseDatabase.getInstance().getReference().child("User details");
-        storageProfilePicsRef = FirebaseStorage.getInstance().getReference().child("Profiles/"+firebaseAuth.getUid());
+        storageProfilePicsRef = FirebaseStorage.getInstance().getReference().child("Profiles/" + firebaseAuth.getUid());
 
-       databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
+        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -96,7 +92,7 @@ public class UpdateProfile extends AppCompatActivity {
         });
 
         //update the user profile in the db.
-        save.setOnClickListener(new View.OnClickListener() {
+        change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 uploadProfileImage();
@@ -105,13 +101,13 @@ public class UpdateProfile extends AppCompatActivity {
                 String email = newUserEmail.getText().toString();
                 String phone = newUserPhone.getText().toString();
 
-                    UserProfile userProfile = new UserProfile(name, email, phone);
+                UserProfile userProfile = new UserProfile(name, email, phone);
 
-                    databaseReference.child("User details").setValue(userProfile);
+                databaseReference.setValue(userProfile);
 
-                    startActivity(new Intent(UpdateProfile.this, myProfile.class));
-                    Toast.makeText(UpdateProfile.this, "Changed Successfully!", Toast.LENGTH_SHORT).show();
-                    finish();
+                startActivity(new Intent(UpdateProfile.this, myProfile.class));
+                Toast.makeText(UpdateProfile.this, "Changed Successfully!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
@@ -125,6 +121,7 @@ public class UpdateProfile extends AppCompatActivity {
 
         getUserinfo();
     }
+
     private void getUserinfo() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -163,13 +160,12 @@ public class UpdateProfile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null){
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUri = result.getUri();
 
             profileImageView.setImageURI(imageUri);
-        }
-        else{
+        } else {
             Toast.makeText(this, "Error, Try again", Toast.LENGTH_SHORT).show();
         }
     }
@@ -181,7 +177,7 @@ public class UpdateProfile extends AppCompatActivity {
         progressDialog.setMessage("Please wait while we are setting your data");
         progressDialog.show();
 
-        if(imageUri != null){
+        if (imageUri != null) {
 
             uploadTask = storageProfilePicsRef.putFile(imageUri);
 
@@ -189,7 +185,7 @@ public class UpdateProfile extends AppCompatActivity {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
 
-                    if(!task.isSuccessful()){
+                    if (!task.isSuccessful()) {
                         throw task.getException();
                     }
 
@@ -198,21 +194,13 @@ public class UpdateProfile extends AppCompatActivity {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful()){
-                        Uri downloadUri = task.getResult();
-                        myUri = downloadUri.toString();
-
-                        HashMap<String, Object> userMap = new HashMap<>();
-                        userMap.put("image", myUri);
-
-                        databaseReference.child(firebaseAuth.getCurrentUser().getUid()).updateChildren(userMap);
+                    if (task.isSuccessful()) {
 
                         progressDialog.dismiss();
                     }
                 }
             });
-        }
-        else{
+        } else {
             progressDialog.dismiss();
             Toast.makeText(this, "Image not selected", Toast.LENGTH_SHORT).show();
         }
@@ -249,12 +237,13 @@ public class UpdateProfile extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void setupUI() {
         profileImageView = (CircleImageView) findViewById(R.id.profile_image);
         newUserName = (EditText) findViewById(R.id.etNameUpdate);
         newUserEmail = (EditText) findViewById(R.id.etEmailUpdate);
         newUserPhone = (EditText) findViewById(R.id.etPhoneUpdate);
-        save = (Button) findViewById(R.id.btnSave);
+        change = (Button) findViewById(R.id.btnSave);
         profileChangeBtn = (TextView) findViewById(R.id.changePic);
 
     }
