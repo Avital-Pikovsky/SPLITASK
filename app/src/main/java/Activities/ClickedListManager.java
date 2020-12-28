@@ -3,10 +3,12 @@ package Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,6 +29,8 @@ public class ClickedListManager extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("Created lists");
     private TextView listName;
+    private Button invite;
+
 
 
     //This Activity is a dynamic activity.
@@ -74,9 +78,18 @@ public class ClickedListManager extends AppCompatActivity {
 
             }
         });
+
+        invite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(ClickedListManager.this, Invite_Search.class));
+            }
+        });
     }
 
     private void setupUI() {
         listName = (TextView) findViewById(R.id.freindListName);
+        invite = (Button) findViewById(R.id.invites);
     }
 }
