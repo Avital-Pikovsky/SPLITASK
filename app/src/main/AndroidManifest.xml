@@ -44,10 +44,14 @@ package="Activities">
     <activity
         android:name="Activities.clickedJoinedList"
         android:parentActivityName=".LoggedInProfile" />
-    <activity android:name="Activities.AdminActivity"
-        android:parentActivityName=".LoggedInProfile"></activity>
+    <activity
+        android:name="Activities.AdminActivity"
+        android:parentActivityName=".LoggedInProfile"/>
 
-    <activity android:name="Activities.Invite_Search"></activity>
+    <activity android:name="Activities.Invite_Search"
+        android:parentActivityName=".LoggedInProfile" />
+
+    <activity android:name="Activities.NotificationActivity"/>
 
 
     <activity android:name="Activities.MainActivity">
@@ -70,4 +74,7 @@ package="Activities">
 </application>
 
 </manifest>
+
+
+
 

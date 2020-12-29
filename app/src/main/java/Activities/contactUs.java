@@ -85,6 +85,9 @@ public class contactUs extends AppCompatActivity {
             case R.id.out:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
+            case R.id.notification:
+                startActivity(new Intent(this, NotificationActivity.class));
+                break;
             default:
 
         }

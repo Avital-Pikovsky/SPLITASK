@@ -5,6 +5,8 @@
     <string name="friends_lists_name">Friends Lists</string>
     <string name="contact_name">Contact Us</string>
     <string name="out_name">Sign Out</string>
+    <string name="notifications">Invite Notifications</string>
+
 
 
 </resources>
