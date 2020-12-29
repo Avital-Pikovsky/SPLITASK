@@ -3,6 +3,7 @@ package Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button signInButton, main;
     private TextView userSignUp, forgotPassword;
     private CheckBox check;
-    private String status = null;
+    private String status = "User";
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -80,46 +81,51 @@ public class MainActivity extends AppCompatActivity {
         userSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!Admin()) {
-
-                    startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-                } else {
-                    startActivity(new Intent(MainActivity.this, AdminActivity.class));
-                }
-
+                startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
             }
+
         });
 
     }
 
     private String Admin() {
+
         Boolean checkBox = check.isChecked();
-        if (!checkBox) {
-            allData.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot allDataSnapshot) {
-                    for (DataSnapshot user : allDataSnapshot.getChildren()) {
-                        DataSnapshot details = user.child("User details");
-                        UserProfile currentUserProfile = details.getValue(UserProfile.class);
-                        if (currentUserProfile.getIsAdmin()) {
-                            status = "trueAdmin";
-                        }
-                        else{
-                            status = "falseAdmin";
+        allData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot allDataSnapshot) {
+                for (DataSnapshot user : allDataSnapshot.getChildren()) {
+                    DataSnapshot details = user.child("User details");
+                    UserProfile currentUserProfile = details.getValue(UserProfile.class);
+
+                    if (currentUserProfile.getIsAdmin() != null) {
+                        if (currentUserProfile.getIsAdmin().equals("true")) {
+                            if (checkBox) {
+                                status = "trueAdmin";
+                            } else {
+                                status = "stupidAdmin";
+                            }
+                        } else {
+                            if (checkBox) {
+                                status = "stupidUser";
+                            } else {
+                                status = "user";
+                            }
                         }
                     }
+                    else{
+                        Toast.makeText(MainActivity.this, "You are sjhdjasdhjasdhjasdhjas admin", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "You are sjhdjasdhjasdhjasdhjas admin", Toast.LENGTH_SHORT).show();
 
-                }
-            });
-
-        }
-        else{
-            status = "regular";
-        }
+            }
+        });
 
         return status;
     }
@@ -144,8 +150,27 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-                        Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
+                        String answer = Admin();
+                        if (answer.equals("user")) {
+                            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+                            Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
+                        }
+                        if (answer.equals("trueAdmin")) {
+                            startActivity(new Intent(MainActivity.this, AdminActivity.class));
+                            Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
+                        }
+                        if (answer.equals("stupidAdmin")) {
+                            Toast.makeText(MainActivity.this, "You are admin", Toast.LENGTH_SHORT).show();
+
+                        }
+                        if (answer.equals("stupidUser")) {
+                            Toast.makeText(MainActivity.this, "You need to unCheck admin", Toast.LENGTH_SHORT).show();
+
+                        }
+
                     } else {
                         Toast.makeText(MainActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
                     }

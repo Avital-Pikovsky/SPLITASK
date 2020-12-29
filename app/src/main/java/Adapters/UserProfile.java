@@ -1,21 +1,17 @@
 package Adapters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class UserProfile {
 
     public String userName;
     public  String userEmail;
     public String userPhone;
-    public Boolean isAdmin;
+    public String isAdmin;
 
     public UserProfile(String userName, String userEmail, String userPhone){
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
-        this.isAdmin = false;
-//        listOfLA = null;
+        this.isAdmin = "false";
     }
 
     public UserProfile(){
@@ -46,8 +42,8 @@ public class UserProfile {
         this.userPhone = userPhone;
     }
 
-    public Boolean getIsAdmin(){return isAdmin;}
+    public String getIsAdmin(){return isAdmin;}
 
-    public void setIsAdmin(Boolean isAdmin){this.isAdmin = isAdmin;}
+    public void setIsAdmin(String isAdmin){this.isAdmin = isAdmin;}
 
 }
