@@ -30,8 +30,7 @@ public class ClickedListManager extends AppCompatActivity {
     private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("Created lists");
     private TextView listName;
     private Button invite;
-
-
+    private String name, listOwner, listID;
 
     //This Activity is a dynamic activity.
     //It contains a List, and fill it by the current list that have been clicked in the previous page.
@@ -65,6 +64,7 @@ public class ClickedListManager extends AppCompatActivity {
                     ListAdapter LA = uniqueUserSnapshot.getValue(ListAdapter.class);
                     if (LA.getId() == keyNumber) {
                         listName.setText(LA.getName());
+                        name = listName.toString();
                         for (int j = 0; j < LA.getList().size(); j++) {
                             clickedList.add((LA.getList().get(j)));
                         }
@@ -82,8 +82,9 @@ public class ClickedListManager extends AppCompatActivity {
         invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(ClickedListManager.this, Invite_Search.class));
+                Intent i = new Intent(ClickedListManager.this, Invite_Search.class);
+                i.putExtra("name", name);
+                startActivity(i);
             }
         });
     }
