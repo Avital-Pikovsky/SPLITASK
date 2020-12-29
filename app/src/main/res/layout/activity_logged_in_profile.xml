@@ -87,6 +87,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/bad_script"
         android:text="Admin"
+        android:visibility="invisible"
         android:textColor="@color/black"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -152,7 +153,7 @@
         app:layout_constraintEnd_toStartOf="@+id/signO"
         app:layout_constraintHorizontal_bias="0.621"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/crownId"
         app:layout_constraintVertical_bias="0.531"
         app:srcCompat="@drawable/settings" />
 
@@ -169,9 +170,10 @@
         app:srcCompat="@drawable/logo_size_removebg_preview" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/crownId"
         android:layout_width="56dp"
         android:layout_height="60dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Admin"
         app:layout_constraintHorizontal_bias="0.601"

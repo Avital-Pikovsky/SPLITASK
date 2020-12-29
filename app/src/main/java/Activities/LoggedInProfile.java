@@ -10,11 +10,25 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoggedInProfile extends AppCompatActivity {
 
     private TextView myProfile, myHistory, lists, contactUs, signOut, adminBtn;
+    private ImageView crown;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+
 
 
     @Override
@@ -22,6 +36,7 @@ public class LoggedInProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in_profile);
         setupUI();
+        CheckIfAdmin();
 
         myProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +85,28 @@ public class LoggedInProfile extends AppCompatActivity {
 
 
     }
+    private void CheckIfAdmin() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child("isAdmin").getValue() != null) {
+                    String flag = snapshot.child("isAdmin").getValue().toString();
+                    if (flag.compareTo("true") == 0) {
+                        adminBtn.setVisibility(View.VISIBLE);
+                        crown.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
     private void setupUI(){
         myProfile = (TextView) findViewById(R.id.myPro);
         myHistory = (TextView) findViewById(R.id.myLists);
@@ -77,6 +114,7 @@ public class LoggedInProfile extends AppCompatActivity {
         contactUs = (TextView) findViewById(R.id.contact);
         signOut = (TextView) findViewById(R.id.signO);
         adminBtn = (TextView) findViewById(R.id.Admin);
+        crown = (ImageView) findViewById(R.id.crownId);
     }
 
 }

@@ -8,11 +8,13 @@ public class UserProfile {
     public String userName;
     public  String userEmail;
     public String userPhone;
+    public Boolean isAdmin;
 
     public UserProfile(String userName, String userEmail, String userPhone){
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
+        this.isAdmin = false;
 //        listOfLA = null;
     }
 
@@ -43,5 +45,9 @@ public class UserProfile {
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
+
+    public Boolean getIsAdmin(){return isAdmin;}
+
+    public void setIsAdmin(Boolean isAdmin){this.isAdmin = isAdmin;}
 
 }
