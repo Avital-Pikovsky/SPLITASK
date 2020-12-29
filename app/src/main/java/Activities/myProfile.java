@@ -134,6 +134,9 @@ public class myProfile extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
 
+            case R.id.notification:
+                startActivity(new Intent(this, NotificationActivity.class));
+                break;
             case R.id.my_lists:
                 startActivity(new Intent(this, CreatedLists.class));
                 break;

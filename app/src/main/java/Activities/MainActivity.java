@@ -5,16 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,14 +18,26 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import Adapters.UserProfile;
 
 public class MainActivity extends AppCompatActivity {
     private EditText userEmail, userPassword;
     private Button signInButton, main;
     private TextView userSignUp, forgotPassword;
     private CheckBox check;
+    private boolean b_flag = false;
+
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private final DatabaseReference allData = firebaseDatabase.getReference();
+
 
 
 
@@ -74,11 +82,39 @@ public class MainActivity extends AppCompatActivity {
         main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+                if(!Admin()) {
+                    startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+                }
+                else{
+                    startActivity(new Intent(MainActivity.this, AdminActivity.class));
+                }
 
             }
         });
 
+    }
+    private boolean Admin(){
+        Boolean checkBox = check.isChecked();
+        if(!checkBox){
+            allData.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot allDataSnapshot) {
+                    for (DataSnapshot user : allDataSnapshot.getChildren()) {
+                        DataSnapshot details = user.child("User details");
+                        UserProfile currentUserProfile = details.getValue(UserProfile.class);
+                        if(currentUserProfile.getIsAdmin()){
+                            b_flag = true;
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
+        return b_flag;
     }
 
     private void setupUI(){
@@ -87,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         signInButton = (Button) findViewById(R.id.signIn);
         userSignUp = (TextView) findViewById(R.id.register);
         forgotPassword = (TextView) findViewById(R.id.ForgotPass);
-        check = (CheckBox) findViewById(R.id.checkBox);
+        check = (CheckBox) findViewById(R.id.checkBox2);
         main = (Button) findViewById(R.id.button2);
 
     }
