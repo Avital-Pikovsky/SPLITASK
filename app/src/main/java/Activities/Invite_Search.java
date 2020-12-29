@@ -80,7 +80,7 @@ public class Invite_Search extends AppCompatActivity {
                                                 String key = getIntent().getExtras().getString("name");
 
 //                                                pendingInvite pinv = new pendingInvite(key, );
-                                                temp.setValue(pinv);
+//                                                temp.setValue(pinv);
                                             }
                                         }
                                     }

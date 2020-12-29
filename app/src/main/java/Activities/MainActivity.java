@@ -31,15 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private Button signInButton, main;
     private TextView userSignUp, forgotPassword;
     private CheckBox check;
-    private boolean b_flag = false;
-
+    private String status = null;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private final DatabaseReference allData = firebaseDatabase.getReference();
-
-
-
+    private DatabaseReference allData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         setupUI();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        allData = firebaseDatabase.getReference();
 
-    firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //to not login again
@@ -61,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn(userEmail.getText().toString(),userPassword.getText().toString());
+                signIn(userEmail.getText().toString(), userPassword.getText().toString());
             }
         });
-        userSignUp.setOnClickListener(new View.OnClickListener() {
+        main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
@@ -79,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        main.setOnClickListener(new View.OnClickListener() {
+        userSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!Admin()) {
+                if (!Admin()) {
+
                     startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-                }
-                else{
+                } else {
                     startActivity(new Intent(MainActivity.this, AdminActivity.class));
                 }
 
@@ -93,20 +91,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private boolean Admin(){
+
+    private String Admin() {
         Boolean checkBox = check.isChecked();
-        if(!checkBox){
+        if (!checkBox) {
             allData.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot allDataSnapshot) {
                     for (DataSnapshot user : allDataSnapshot.getChildren()) {
                         DataSnapshot details = user.child("User details");
                         UserProfile currentUserProfile = details.getValue(UserProfile.class);
-                        if(currentUserProfile.getIsAdmin()){
-                            b_flag = true;
+                        if (currentUserProfile.getIsAdmin()) {
+                            status = "trueAdmin";
+                        }
+                        else{
+                            status = "falseAdmin";
                         }
                     }
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
@@ -114,10 +117,14 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
-        return b_flag;
+        else{
+            status = "regular";
+        }
+
+        return status;
     }
 
-    private void setupUI(){
+    private void setupUI() {
         userEmail = (EditText) findViewById(R.id.mainUserEmail);
         userPassword = (EditText) findViewById(R.id.mainUserPassword);
         signInButton = (Button) findViewById(R.id.signIn);
@@ -127,11 +134,11 @@ public class MainActivity extends AppCompatActivity {
         main = (Button) findViewById(R.id.button2);
 
     }
-    private void signIn(String userEmail, String userPassword){
-        if(userEmail.isEmpty() || userPassword.isEmpty()){
+
+    private void signIn(String userEmail, String userPassword) {
+        if (userEmail.isEmpty() || userPassword.isEmpty()) {
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

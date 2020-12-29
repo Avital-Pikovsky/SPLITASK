@@ -40,7 +40,6 @@ public class myProfile extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-
     private DatabaseReference databaseReference;
 
 
