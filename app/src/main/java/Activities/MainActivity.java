@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot user : allDataSnapshot.getChildren()) {
                     DataSnapshot details = user.child("User details");
                     UserProfile currentUserProfile = details.getValue(UserProfile.class);
-
                     if (currentUserProfile.getIsAdmin() != null) {
                         if (currentUserProfile.getIsAdmin().equals("true")) {
                             if (checkBox) {

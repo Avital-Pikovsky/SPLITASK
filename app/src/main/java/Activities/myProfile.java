@@ -28,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import Adapters.Admin;
 import Adapters.UserProfile;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -155,11 +154,11 @@ public class myProfile extends AppCompatActivity {
     }
     private void setupUI() {
 
-        profileImage = (CircleImageView) findViewById(R.id.profile_pic);
-        profileName = (TextView) findViewById(R.id.tvProfileName);
-        profileEmail = (TextView) findViewById(R.id.tvProfileEmail);
-        profilePhone = (TextView) findViewById(R.id.tvProfilePhone);
-        profileUpdate = (Button) findViewById(R.id.btnProfileUpdate);
+        profileImage = (CircleImageView) findViewById(R.id.UserProfilePic);
+        profileName = (TextView) findViewById(R.id.UserNameId);
+        profileEmail = (TextView) findViewById(R.id.UserEmailId);
+        profilePhone = (TextView) findViewById(R.id.UserPhoneId);
+        profileUpdate = (Button) findViewById(R.id.btnUserUpdate);
         changePassword = (Button) findViewById(R.id.btnChangePass);
     }
 

@@ -57,22 +57,26 @@ package="Activities">
 
     <activity android:name="Activities.NotificationActivity" />
 
-    <activity android:name="Activities.SelectUserDetailsActivity"
-        android:parentActivityName=".AdminActivity"/>
+    <activity
+        android:name="Activities.SelectUserDetailsActivity"
+        android:parentActivityName=".AdminActivity" />
 
 
-
-    <activity android:name="Activities.UserDetailsActivity"
+    <activity
+        android:name="Activities.UserDetailsActivity"
         android:parentActivityName=".SelectUserDetailsActivity" />
 
 
-    <activity android:name="Activities.UserListsActivity"
+    <activity
+        android:name="Activities.UserListsActivity"
         android:parentActivityName=".SelectUserDetailsActivity" />
 
 
-    <activity android:name="Activities.UserJoinedListsActivity"
+    <activity
+        android:name="Activities.UserJoinedListsActivity"
         android:parentActivityName=".SelectUserDetailsActivity" />
 
+    <activity android:name="Activities.UserViewList"></activity>
 
 
     <activity android:name="Activities.MainActivity">
@@ -92,6 +96,7 @@ package="Activities">
     <meta-data
         android:name="preloaded_fonts"
         android:resource="@array/preloaded_fonts" />
+
 
 </application>
 

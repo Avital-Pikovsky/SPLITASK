@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +38,7 @@ public class AdminActivity extends AppCompatActivity {
     ArrayList<String> listOfUsers;
     ArrayAdapter<String > adapter;
 
+    private Button signOut;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference allData = firebaseDatabase.getReference();
@@ -43,6 +48,7 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        signOut = (Button) findViewById(R.id.signOutId);
 
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
@@ -72,6 +78,16 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String clickedUser = (String) listView.getItemAtPosition(position);
+                Intent i = new Intent(AdminActivity.this, SelectUserDetailsActivity.class);
+                i.putExtra("userName", clickedUser);
+                startActivity(i);
+            }
+        });
+
         //fill the list from the database
         allData.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,6 +103,13 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseAuth.signOut();
+                startActivity(new Intent(AdminActivity.this, MainActivity.class));
             }
         });
     }

@@ -12,7 +12,7 @@
     </include>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_pic"
+        android:id="@+id/UserProfilePic"
         android:layout_width="181dp"
         android:layout_height="174dp"
         android:src="@drawable/user"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.096" />
 
     <TextView
-        android:id="@+id/tvProfileName"
+        android:id="@+id/UserNameId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="284dp"
@@ -36,11 +36,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_pic"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfilePic"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/tvProfileEmail"
+        android:id="@+id/UserEmailId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
@@ -51,11 +51,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProfileName"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameId"
         app:layout_constraintVertical_bias="0.12" />
 
     <TextView
-        android:id="@+id/tvProfilePhone"
+        android:id="@+id/UserPhoneId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
@@ -65,11 +65,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProfileEmail"
+        app:layout_constraintTop_toBottomOf="@+id/UserEmailId"
         app:layout_constraintVertical_bias="0.152" />
 
     <Button
-        android:id="@+id/btnProfileUpdate"
+        android:id="@+id/btnUserUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#bdbdbd"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProfilePhone"
+        app:layout_constraintTop_toBottomOf="@+id/UserPhoneId"
 
         app:layout_constraintVertical_bias="0.277" />
 
@@ -99,6 +99,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/btnProfileUpdate" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUserUpdate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

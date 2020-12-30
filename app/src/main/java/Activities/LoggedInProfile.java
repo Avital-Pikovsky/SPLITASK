@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoggedInProfile extends AppCompatActivity {
 
-    private TextView myProfile, myHistory, lists, contactUs, signOut, adminBtn;
+    private TextView myProfile, myHistory, lists, contactUs, signOut;
     private ImageView crown;
 
     private FirebaseAuth firebaseAuth;
@@ -39,7 +39,6 @@ public class LoggedInProfile extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         setupUI();
-        CheckIfAdmin();
 
         myProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,39 +76,8 @@ public class LoggedInProfile extends AppCompatActivity {
                 startActivity(new Intent(LoggedInProfile.this, MainActivity.class));
             }
         });
-        adminBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoggedInProfile.this, AdminActivity.class));
-
-            }
-        });
-
-
-
     }
-    private void CheckIfAdmin() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child("isAdmin").getValue() != null) {
-                    String flag = snapshot.child("isAdmin").getValue().toString();
-                    if (flag.compareTo("true") == 0) {
-                        adminBtn.setVisibility(View.VISIBLE);
-                        crown.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -151,8 +119,6 @@ public class LoggedInProfile extends AppCompatActivity {
         lists = (TextView) findViewById(R.id.friendsLists);
         contactUs = (TextView) findViewById(R.id.contact);
         signOut = (TextView) findViewById(R.id.signO);
-        adminBtn = (TextView) findViewById(R.id.Admin);
-        crown = (ImageView) findViewById(R.id.crownId);
     }
 
 }
