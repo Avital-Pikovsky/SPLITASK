@@ -10,12 +10,18 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".Invite_Search">
 
+    <include
+        layout="@layout/app_bar"
+        android:id="@+id/app_bar">
+    </include>
+
     <ListView
         android:id="@+id/lv1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="410dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/searchView"
-        android:divider="#ad5"
+        android:layout_marginTop="-4dp"
+        android:divider="@color/black"
         android:dividerHeight="2dp" />
 
     <SearchView
@@ -23,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="59dp"
         android:iconifiedByDefault="false"
         android:queryHint="Search Here" />
 
