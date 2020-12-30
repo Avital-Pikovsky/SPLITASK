@@ -36,8 +36,11 @@ package="Activities">
     <activity
         android:name="Activities.myProfile"
         android:parentActivityName=".LoggedInProfile" />
+
     <activity android:name="Activities.LoggedInProfile" />
+
     <activity android:name="Activities.RegistrationActivity" />
+
     <activity
         android:name="Activities.ClickedListManager"
         android:parentActivityName=".LoggedInProfile" />
@@ -53,6 +56,14 @@ package="Activities">
         android:parentActivityName=".LoggedInProfile" />
 
     <activity android:name="Activities.NotificationActivity" />
+
+    <activity android:name="Activities.UserDetailsActivity"></activity>
+
+    <activity android:name="Activities.UserListsActivity"></activity>
+
+    <activity android:name="Activities.UserJoinedListsActivity"></activity>
+
+
 
     <activity android:name="Activities.SelectUserDetailsActivity"></activity>
 
@@ -77,6 +88,4 @@ package="Activities">
 </application>
 
 </manifest>
-
-
 
