@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.concurrent.TimeUnit;
+
 import Adapters.UserProfile;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //to not login again
-//        if (user != null) {
-//            finish();
-//            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-//        }
+        if (user != null) {
+            finish();
+            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+        }
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,25 +99,26 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot user : allDataSnapshot.getChildren()) {
                     DataSnapshot details = user.child("User details");
                     UserProfile currentUserProfile = details.getValue(UserProfile.class);
+                    if (currentUserProfile.getUserEmail().equals(userEmail.getText().toString())) {
 
-                    if (currentUserProfile.getIsAdmin() != null) {
-                        if (currentUserProfile.getIsAdmin().equals("true")) {
-                            if (checkBox) {
-                                status = "trueAdmin";
+                        if (currentUserProfile.getIsAdmin() != null) {
+                            if (currentUserProfile.getIsAdmin().equals("true")) {
+                                if (checkBox) {
+                                    status = "trueAdmin";
+                                } else {
+                                    status = "stupidAdmin";
+                                }
                             } else {
-                                status = "stupidAdmin";
+                                if (checkBox) {
+                                    status = "stupidUser";
+                                } else {
+                                    status = "user";
+                                }
                             }
                         } else {
-                            if (checkBox) {
-                                status = "stupidUser";
-                            } else {
-                                status = "user";
-                            }
-                        }
-                    }
-                    else{
-                        Toast.makeText(MainActivity.this, "You are sjhdjasdhjasdhjasdhjas admin", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "You are sjhdjasdhjasdhjasdhjas admin", Toast.LENGTH_SHORT).show();
 
+                        }
                     }
                 }
             }
@@ -152,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
 
                         String answer = Admin();
+
                         if (answer.equals("user")) {
                             startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
                             Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();

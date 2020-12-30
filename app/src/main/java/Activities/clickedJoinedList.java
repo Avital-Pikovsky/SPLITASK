@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import Adapters.ListAdapter;
+import Adapters.UserProfile;
 
 public class clickedJoinedList extends AppCompatActivity {
 

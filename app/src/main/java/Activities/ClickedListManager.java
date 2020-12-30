@@ -22,12 +22,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import Adapters.ListAdapter;
+import Adapters.UserProfile;
 
 public class ClickedListManager extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("Created lists");
+    private final DatabaseReference owner = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
+
     private TextView listName;
     private Button invite;
     private String name, listOwner, listID;
@@ -64,7 +67,10 @@ public class ClickedListManager extends AppCompatActivity {
                     ListAdapter LA = uniqueUserSnapshot.getValue(ListAdapter.class);
                     if (LA.getId() == keyNumber) {
                         listName.setText(LA.getName());
-                        name = listName.toString();
+                        name = listName.getText().toString();
+                        listID = LA.getId()+"";
+
+//                       listOwner =
                         for (int j = 0; j < LA.getList().size(); j++) {
                             clickedList.add((LA.getList().get(j)));
                         }
@@ -84,6 +90,7 @@ public class ClickedListManager extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(ClickedListManager.this, Invite_Search.class);
                 i.putExtra("name", name);
+                i.putExtra("ID",listID);
                 startActivity(i);
             }
         });

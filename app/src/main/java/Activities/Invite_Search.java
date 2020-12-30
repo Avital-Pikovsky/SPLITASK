@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import Adapters.ListAdapter;
 import Adapters.UserProfile;
@@ -40,7 +41,7 @@ public class Invite_Search extends AppCompatActivity {
     ListView listView;
     ArrayList<String> listOfUsers;
     ArrayAdapter<String> adapter;
-
+    String owner = null;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference allData = firebaseDatabase.getReference();
@@ -55,7 +56,6 @@ public class Invite_Search extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
 
@@ -81,16 +81,25 @@ public class Invite_Search extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(DataSnapshot allDataSnapshot) {
 
-                                        DataSnapshot nameOfOwnerSnap = allDataSnapshot.child(firebaseAuth.getUid()).child("User details");
                                         for (DataSnapshot user : allDataSnapshot.getChildren()) {
                                             DataSnapshot details = user.child("User details");
                                             UserProfile currentUserProfile = details.getValue(UserProfile.class);
                                             if (currentUserProfile.getUserName().equals(clickedName)) {
-                                                DatabaseReference temp = allData2.child(user.getKey()).child("Pending invitation");
-                                                String key = getIntent().getExtras().getString("name");
+                                                DatabaseReference temp = allData2.child(user.getKey()).child("Pending invitation").push();
+                                                String listName = getIntent().getExtras().getString("name");
+                                                String ID = getIntent().getExtras().getString("ID");
+                                                pendingInvite pinv = new pendingInvite(listName, owner, ID);
+                                                DataSnapshot invites = allDataSnapshot.child(user.getKey()).child("Pending invitation");
+                                                Boolean found = false;
+                                                for (DataSnapshot inv : invites.getChildren()) {
+                                                    pendingInvite p = inv.getValue(pendingInvite.class);
+                                                    if(p.getListId().equals(pinv.getListId())){
+                                                        found = true;
+                                                    }
 
-//                                                pendingInvite pinv = new pendingInvite(key, );
-//                                                temp.setValue(pinv);
+                                                }
+                                                if(!found)
+                                                temp.setValue(pinv);
                                             }
                                         }
                                     }
@@ -142,6 +151,10 @@ public class Invite_Search extends AppCompatActivity {
         allData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot allDataSnapshot) {
+                listOfUsers.clear();
+                DataSnapshot thisUser = allDataSnapshot.child(firebaseAuth.getUid()).child("User details");
+                UserProfile thisUserProfile = thisUser.getValue(UserProfile.class);
+                owner = thisUserProfile.getUserName();
                 for (DataSnapshot user : allDataSnapshot.getChildren()) {
                     DataSnapshot details = user.child("User details");
                     UserProfile currentUserProfile = details.getValue(UserProfile.class);
@@ -157,7 +170,9 @@ public class Invite_Search extends AppCompatActivity {
 
 
         });
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

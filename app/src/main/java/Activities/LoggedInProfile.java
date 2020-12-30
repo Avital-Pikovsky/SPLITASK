@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,12 +15,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import Adapters.UserProfile;
 
 public class LoggedInProfile extends AppCompatActivity {
 
@@ -28,8 +36,7 @@ public class LoggedInProfile extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-
-
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,7 @@ public class LoggedInProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setupUI();
         CheckIfAdmin();
-
+        firebaseAuth = FirebaseAuth.getInstance();
         myProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +66,7 @@ public class LoggedInProfile extends AppCompatActivity {
         lists.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoggedInProfile.this, JoinedLists.class));
+                startActivity(new Intent(LoggedInProfile.this, NotificationActivity.class));
             }
         });
 
@@ -73,7 +80,7 @@ public class LoggedInProfile extends AppCompatActivity {
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                firebaseAuth.signOut();
                 startActivity(new Intent(LoggedInProfile.this, MainActivity.class));
             }
         });
@@ -86,8 +93,8 @@ public class LoggedInProfile extends AppCompatActivity {
         });
 
 
-
     }
+
     private void CheckIfAdmin() {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -95,7 +102,10 @@ public class LoggedInProfile extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child("isAdmin").getValue() != null) {
+                UserProfile u = snapshot.getValue(UserProfile.class);
+                userName = u.getUserName();
+                if (snapshot.child("isAdmin").getValue() != null) {
+
                     String flag = snapshot.child("isAdmin").getValue().toString();
                     if (flag.compareTo("true") == 0) {
                         adminBtn.setVisibility(View.VISIBLE);
@@ -103,6 +113,7 @@ public class LoggedInProfile extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -145,7 +156,8 @@ public class LoggedInProfile extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    private void setupUI(){
+
+    private void setupUI() {
         myProfile = (TextView) findViewById(R.id.myPro);
         myHistory = (TextView) findViewById(R.id.myLists);
         lists = (TextView) findViewById(R.id.friendsLists);
