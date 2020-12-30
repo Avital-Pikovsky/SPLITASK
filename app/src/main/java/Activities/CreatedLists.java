@@ -77,6 +77,7 @@ public class CreatedLists extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                listHistory.clear();
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                     ListAdapter LA = uniqueUserSnapshot.getValue(ListAdapter.class);
                     listHistory.add(LA.getName() + " ID:" + LA.getId());
@@ -92,6 +93,7 @@ public class CreatedLists extends AppCompatActivity {
 
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

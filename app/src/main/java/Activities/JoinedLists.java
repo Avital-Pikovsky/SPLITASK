@@ -94,6 +94,7 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
         JoinedListsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot1) {
+                friendListHistory.clear();
                 for (DataSnapshot uniqueUserSnapshot1 : dataSnapshot1.getChildren()) {
                     JoinedListAdapter JLA = uniqueUserSnapshot1.getValue(JoinedListAdapter.class);
                     arrayAdapter.notifyDataSetChanged();

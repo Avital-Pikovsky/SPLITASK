@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.concurrent.TimeUnit;
+
 import Adapters.UserProfile;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //to not login again
-//        if (user != null) {
-//            finish();
-//            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-//        }
+        if (user != null) {
+            finish();
+            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+        }
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,35 +103,33 @@ public class MainActivity extends AppCompatActivity {
                         if (currentUserProfile.getIsAdmin().equals("true")) {
                             if (checkBox) {
                                 status = "trueAdmin";
+                                } else {
+                                    status = "stupidAdmin";
+                                }
                             } else {
-                                status = "stupidAdmin";
+                                if (checkBox) {
+                                    status = "stupidUser";
+                                } else {
+                                    status = "user";
+                                }
                             }
                         } else {
-                            if (checkBox) {
-                                status = "stupidUser";
-                            } else {
-                                status = "user";
-                            }
+                            Toast.makeText(MainActivity.this, "You are sjhdjasdhjasdhjasdhjas admin", Toast.LENGTH_SHORT).show();
+
                         }
                     }
-                    else{
-                        Toast.makeText(MainActivity.this, "You are sjhdjasdhjasdhjasdhjas admin", Toast.LENGTH_SHORT).show();
-
-                    }
                 }
-            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, "You are sjhdjasdhjasdhjasdhjas admin", Toast.LENGTH_SHORT).show();
 
             }
         });
-
+        
         return status;
     }
 
-    private void setupUI() {
+    private void setupUI(){
         userEmail = (EditText) findViewById(R.id.mainUserEmail);
         userPassword = (EditText) findViewById(R.id.mainUserPassword);
         signInButton = (Button) findViewById(R.id.signIn);
@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
 
                         String answer = Admin();
+
                         if (answer.equals("user")) {
                             startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
                             Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
@@ -179,3 +180,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+
+
+
