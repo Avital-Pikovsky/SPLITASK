@@ -17,6 +17,7 @@
 
     <ListView
         android:id="@+id/lv1"
+        android:fontFamily="casual"
         android:layout_width="410dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchView"
@@ -26,6 +27,7 @@
 
     <SearchView
         android:id="@+id/searchView"
+        android:fontFamily="casual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

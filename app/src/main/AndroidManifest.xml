@@ -7,7 +7,7 @@ package="Activities">
 
 <application
     android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
+    android:icon="@drawable/images"
     android:label="SpliTask"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
@@ -57,15 +57,23 @@ package="Activities">
 
     <activity android:name="Activities.NotificationActivity" />
 
-    <activity android:name="Activities.UserDetailsActivity"></activity>
-
-    <activity android:name="Activities.UserListsActivity"></activity>
-
-    <activity android:name="Activities.UserJoinedListsActivity"></activity>
+    <activity android:name="Activities.SelectUserDetailsActivity"
+        android:parentActivityName=".AdminActivity"/>
 
 
 
-    <activity android:name="Activities.SelectUserDetailsActivity"></activity>
+    <activity android:name="Activities.UserDetailsActivity"
+        android:parentActivityName=".SelectUserDetailsActivity" />
+
+
+    <activity android:name="Activities.UserListsActivity"
+        android:parentActivityName=".SelectUserDetailsActivity" />
+
+
+    <activity android:name="Activities.UserJoinedListsActivity"
+        android:parentActivityName=".SelectUserDetailsActivity" />
+
+
 
     <activity android:name="Activities.MainActivity">
 

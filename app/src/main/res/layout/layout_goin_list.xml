@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:padding="10dp"
+        android:fontFamily="casual"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="49dp">
@@ -19,7 +20,7 @@
             android:id="@+id/heading"
             android:layout_width="402dp"
             android:layout_height="53dp"
-            android:fontFamily="@font/bad_script"
+            android:fontFamily="casual"
             android:text="ADD ID OF A LIST"
             android:textColor="#000"
             android:textSize="18sp" />
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="68dp"
-            android:fontFamily="@font/bad_script"
+            android:fontFamily="casual"
             android:hint="enter ID of the list" />
 
     </RelativeLayout>
@@ -56,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#bdbdbd"
-        android:fontFamily="@font/bad_script"
+        android:fontFamily="casual"
         android:text="CANCEL"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
