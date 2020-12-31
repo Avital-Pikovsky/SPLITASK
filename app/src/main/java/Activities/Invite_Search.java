@@ -44,8 +44,8 @@ public class Invite_Search extends AppCompatActivity {
     String owner = null;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private final DatabaseReference allData = firebaseDatabase.getReference();
-    private final DatabaseReference allData2 = firebaseDatabase.getReference();
+    private final DatabaseReference allD = firebaseDatabase.getReference();
+    private final DatabaseReference allD1 = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class Invite_Search extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                allData2.addValueEventListener(new ValueEventListener() {
+                                allD.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot allDataSnapshot) {
 
@@ -85,7 +85,7 @@ public class Invite_Search extends AppCompatActivity {
                                             DataSnapshot details = user.child("User details");
                                             UserProfile currentUserProfile = details.getValue(UserProfile.class);
                                             if (currentUserProfile.getUserName().equals(clickedName)) {
-                                                DatabaseReference temp = allData2.child(user.getKey()).child("Pending invitation").push();
+                                                DatabaseReference temp = allD.child(user.getKey()).child("Pending invitation").push();
                                                 String listName = getIntent().getExtras().getString("name");
                                                 String ID = getIntent().getExtras().getString("ID");
                                                 pendingInvite pinv = new pendingInvite(listName, owner, ID);
@@ -93,13 +93,12 @@ public class Invite_Search extends AppCompatActivity {
                                                 Boolean found = false;
                                                 for (DataSnapshot inv : invites.getChildren()) {
                                                     pendingInvite p = inv.getValue(pendingInvite.class);
-                                                    if(p.getListId().equals(pinv.getListId())){
+                                                    if (p.getListId().equals(pinv.getListId())) {
                                                         found = true;
                                                     }
-
                                                 }
-                                                if(!found)
-                                                temp.setValue(pinv);
+                                                if (!found)
+                                                    temp.setValue(pinv);
                                             }
                                         }
                                     }
@@ -110,7 +109,6 @@ public class Invite_Search extends AppCompatActivity {
                                     }
 
                                 });
-
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -148,7 +146,7 @@ public class Invite_Search extends AppCompatActivity {
 
 
         //fill the list from the database
-        allData.addValueEventListener(new ValueEventListener() {
+        allD1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot allDataSnapshot) {
                 listOfUsers.clear();
@@ -160,6 +158,7 @@ public class Invite_Search extends AppCompatActivity {
                     UserProfile currentUserProfile = details.getValue(UserProfile.class);
                     listOfUsers.add(currentUserProfile.getUserName());
                     adapter.notifyDataSetChanged();
+
                 }
             }
 
@@ -170,6 +169,14 @@ public class Invite_Search extends AppCompatActivity {
 
 
         });
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        finishAndRemoveTask();
 
     }
 

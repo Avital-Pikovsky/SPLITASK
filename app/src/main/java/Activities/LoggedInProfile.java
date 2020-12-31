@@ -1,9 +1,11 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,8 +34,9 @@ import Adapters.UserProfile;
 public class LoggedInProfile extends AppCompatActivity {
 
     private TextView myProfile, myHistory, lists, contactUs, signOut;
-
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth firebaseAuth;
+    private final DatabaseReference allData = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,34 @@ public class LoggedInProfile extends AppCompatActivity {
         setupUI();
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        allData.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot name = snapshot.child(firebaseAuth.getUid()).child("User details");
+                UserProfile u = name.getValue(UserProfile.class);
+                String myName = u.getUserName();
+                int counter = 0;
+                DataSnapshot invites = snapshot.child(firebaseAuth.getUid()).child("Pending invitation");
+                for (DataSnapshot inv : invites.getChildren()) {
+                    counter++;
+                }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoggedInProfile.this);
+
+                if(counter!= 0)
+                    builder.setMessage("Hello " + myName + "!\nYou have "+counter+" new invitations ").create().show();
+                else
+                    builder.setMessage("Hello " + myName + "!\nwe missed you :)").create().show();
+
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         myProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
