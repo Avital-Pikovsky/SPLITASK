@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Activities.RegistrationActivity">
+    tools:context="Activities.RegistrationActivity"
+    android:background="@drawable/gradient_background">
 
     <TextView
         android:id="@+id/SignUp"
@@ -160,7 +161,7 @@
         android:id="@+id/btnRegister"
         android:layout_width="136dp"
         android:layout_height="60dp"
-        android:background="#bdbdbd"
+        android:background="#9F4F89B8"
         android:fontFamily="casual"
         android:text="Sign Up"
         android:textColor="@color/white"

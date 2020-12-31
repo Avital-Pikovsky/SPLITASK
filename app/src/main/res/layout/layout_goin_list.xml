@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
 
 
     <RelativeLayout
@@ -40,7 +41,7 @@
         android:id="@+id/action_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#bdbdbd"
+        android:background="#9F4F89B8"
         android:fontFamily="@font/bad_script"
         android:text="OK"
         android:textColor="@color/white"
@@ -56,7 +57,7 @@
         android:id="@+id/action_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#bdbdbd"
+        android:background="#9F4F89B8"
         android:fontFamily="casual"
         android:text="CANCEL"
         android:textColor="@color/white"

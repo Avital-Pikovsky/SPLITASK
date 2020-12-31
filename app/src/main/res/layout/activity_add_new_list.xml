@@ -5,7 +5,8 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Activities.addNewList">
+    tools:context="Activities.addNewList"
+    android:background="@drawable/gradient_background">
 
     <include
         layout="@layout/app_bar"
@@ -34,7 +35,7 @@
         android:id="@+id/SaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#bdbdbd"
+        android:background="#9F4F89B8"
         android:fontFamily="casual"
         android:text="Save"
         android:textColor="@color/white"
@@ -49,13 +50,14 @@
 
     <ListView
         android:id="@+id/list_view"
-        android:layout_width="348dp"
-        android:layout_height="378dp"
+        android:layout_width="344dp"
+        android:layout_height="341dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.672"
+        app:layout_constraintVertical_bias="0.415"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -63,18 +65,17 @@
         android:layout_width="333dp"
         android:layout_height="82dp"
         android:layout_gravity="center_horizontal"
-        android:background="#bdbdbd"
-        android:fontFamily="@font/bad_script"
+        android:background="#9F4F89B8"
+        android:fontFamily="casual"
         android:text="Add item to the list"
         android:textColor="@color/white"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
-        app:layout_constraintVertical_bias="0.221"
+        app:layout_constraintVertical_bias="0.828"
         tools:ignore="MissingConstraints" />
 
 

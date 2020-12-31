@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Activities.JoinedLists">
+    tools:context="Activities.JoinedLists"
+    android:background="@drawable/gradient_background">
 
     <include
         layout="@layout/app_bar"
@@ -37,7 +38,7 @@
         android:id="@+id/join"
         android:layout_width="171dp"
         android:layout_height="66dp"
-        android:background="#bdbdbd"
+        android:background="#9F4F89B8"
         android:fontFamily="casual"
         android:text="Join to a List"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"

@@ -5,13 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectUserDetailsActivity">
+    tools:context=".SelectUserDetailsActivity"
+    android:background="@drawable/gradient_background">
 
   <Button
       android:id="@+id/userDetailsBtn"
       android:layout_width="228dp"
       android:layout_height="86dp"
       android:text="User Details"
+      android:background="#9F4F89B8"
       android:textSize="28dp"
       android:fontFamily="casual"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -26,6 +28,7 @@
       android:layout_width="229dp"
       android:layout_height="83dp"
       android:text="User Lists"
+      android:background="#9F4F89B8"
       android:textSize="28dp"
       android:fontFamily="casual"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -40,6 +43,7 @@
       android:layout_width="324dp"
       android:layout_height="79dp"
       android:text="User Friends Lists"
+      android:background="#9F4F89B8"
       android:fontFamily="casual"
       android:textSize="28dp"
       app:layout_constraintBottom_toBottomOf="parent"

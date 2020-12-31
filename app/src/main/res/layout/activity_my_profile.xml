@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Activities.myProfile">
+    tools:context="Activities.myProfile"
+    android:background="@drawable/gradient_background">
 
     <include
         layout="@layout/app_bar"
@@ -72,7 +73,7 @@
         android:id="@+id/btnUserUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#bdbdbd"
+        android:background="#9F4F89B8"
         android:fontFamily="casual"
         android:gravity="center"
         android:text="Edit"
@@ -90,7 +91,7 @@
         android:id="@+id/btnChangePass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#bdbdbd"
+        android:background="#9F4F89B8"
         android:fontFamily="casual"
         android:text="Change Password"
         android:textColor="@color/white"

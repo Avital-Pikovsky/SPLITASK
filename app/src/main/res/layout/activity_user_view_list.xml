@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserViewList">
+    tools:context=".UserViewList"
+    android:background="@drawable/gradient_background">
 
   <LinearLayout
       android:id="@+id/linearLayout"
@@ -29,8 +30,8 @@
       android:id="@+id/listName"
       android:layout_width="187dp"
       android:layout_height="53dp"
-      android:fontFamily="sans-serif-black"
-      android:textSize="24sp"
+      android:textSize="28sp"
+      android:fontFamily="casual"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.459"

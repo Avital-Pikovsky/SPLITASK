@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Activities.MainActivity">
+    tools:context="Activities.MainActivity"
+    android:background="@drawable/gradient_background">
 
 
     <TextView
@@ -104,7 +105,7 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginBottom="4dp"
-        android:background="#bdbdbd"
+        android:background="#9F4F89B8"
         android:fontFamily="casual"
         android:text="Sign In"
         android:textColor="@color/white"

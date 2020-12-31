@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Activities.CreatedLists">
+    tools:context="Activities.CreatedLists"
+    android:background="@drawable/gradient_background">
 
     <include
         layout="@layout/app_bar"
@@ -13,15 +14,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="342dp"
-        android:layout_height="311dp"
+        android:layout_width="348dp"
+        android:layout_height="403dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.728">
+        app:layout_constraintVertical_bias="0.655">
 
         <ListView
             android:id="@+id/list"
@@ -58,17 +59,17 @@
 
     <TextView
         android:id="@+id/listHist"
-        android:layout_width="188dp"
-        android:layout_height="73dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
         android:fontFamily="casual"
-        android:text="My Lists History"
+        android:text="My Lists History:"
         android:textAlignment="center"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151" />
+        app:layout_constraintVertical_bias="0.154" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

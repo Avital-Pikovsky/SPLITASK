@@ -55,7 +55,9 @@ package="Activities">
         android:name="Activities.Invite_Search"
         android:parentActivityName=".LoggedInProfile" />
 
-    <activity android:name="Activities.NotificationActivity" />
+    <activity android:name="Activities.NotificationActivity"
+        android:parentActivityName=".LoggedInProfile" />
+
 
     <activity
         android:name="Activities.SelectUserDetailsActivity"
