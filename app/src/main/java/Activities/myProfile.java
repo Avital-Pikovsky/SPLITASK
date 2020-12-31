@@ -145,6 +145,7 @@ public class myProfile extends AppCompatActivity {
                 startActivity(new Intent(this, contactUs.class));
                 break;
             case R.id.out:
+                firebaseAuth.signOut();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             default:

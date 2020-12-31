@@ -155,6 +155,7 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
                 startActivity(new Intent(this, contactUs.class));
                 break;
             case R.id.out:
+                firebaseAuth.signOut();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.notification:

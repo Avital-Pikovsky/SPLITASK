@@ -33,7 +33,7 @@ public class UserViewList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_view_list);
 
-        listName = (TextView) findViewById(R.id.freindListName);
+        listName = (TextView) findViewById(R.id.listName);
 
 
         String key = getIntent().getExtras().getString("listKey");
@@ -56,14 +56,17 @@ public class UserViewList extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
-                    ListAdapter LA = uniqueUserSnapshot.getValue(ListAdapter.class);
-                    if (LA.getId() == keyNumber) {
-                        listName.setText(LA.getName());
-                        name = listName.toString();
-                        for (int j = 0; j < LA.getList().size(); j++) {
-                            clickedList.add((LA.getList().get(j)));
+                    DataSnapshot user_lists = uniqueUserSnapshot.child("Created lists");
+                    for (DataSnapshot user_list : user_lists.getChildren()) {
+                        ListAdapter LA = user_list.getValue(ListAdapter.class);
+                        if (LA.getId() == keyNumber) {
+                            listName.setText(LA.getName());
+                            name = listName.getText().toString();
+                            for (int j = 0; j < LA.getList().size(); j++) {
+                                clickedList.add((LA.getList().get(j)));
+                            }
+                            arrayAdapter.notifyDataSetChanged();
                         }
-                        arrayAdapter.notifyDataSetChanged();
                     }
                 }
             }

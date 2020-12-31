@@ -16,10 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class contactUs extends AppCompatActivity {
 
     private EditText message, subject;
     private Button send;
+
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +88,7 @@ public class contactUs extends AppCompatActivity {
                 startActivity(new Intent(this, JoinedLists.class));
                 break;
             case R.id.out:
+                firebaseAuth.signOut();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.notification:
