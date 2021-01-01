@@ -59,9 +59,7 @@ public class addNewList extends AppCompatActivity implements OnClickListener,
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        setupUI();
-
-        //Connecting akk the buttons to the xml by id
+        //Connecting app the buttons to the xml by id
         setupUI();
 
         datasource = new ArrayList<String>();

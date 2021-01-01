@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClickedListManager"
+    tools:context=".EditListByManager"
     android:background="@drawable/gradient_background">
   <include
       layout="@layout/app_bar"
@@ -32,7 +32,7 @@
 
   </LinearLayout>
 
-  <TextView
+  <EditText
       android:id="@+id/freindListName"
       android:layout_width="187dp"
       android:layout_height="53dp"
@@ -46,30 +46,28 @@
       app:layout_constraintVertical_bias="0.089" />
 
   <Button
-      android:id="@+id/invites"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:background="#9F4F89B8"
-      android:fontFamily="casual"
-      android:text="invite"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.498"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.947" />
-
-  <Button
       android:id="@+id/edit"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Edit "
+      android:text="Add item"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.77" />
+
+  <Button
+      android:id="@+id/changeN"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Change Name"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.468"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.166" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

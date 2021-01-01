@@ -1,7 +1,10 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,6 +52,46 @@ public class UserViewList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) list.getItemAtPosition(position);
 
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                clickedList.remove(clickedItem);
+
+                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (DataSnapshot user : snapshot.getChildren()) {
+                                            DataSnapshot createdLists = user.child("Created lists");
+                                            for (DataSnapshot list : createdLists.getChildren()) {
+                                                ListAdapter l = list.getValue(ListAdapter.class);
+                                                if (l.getId() == keyNumber) {
+                                                    l.setList(clickedList);
+                                                    l.setName(listName.getText().toString());
+                                                    DatabaseReference d = databaseReference.child(user.getKey()).child("Created lists").child(list.getKey());
+                                                    d.setValue(l);
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserViewList.this);
+                builder.setMessage("Are you sure you want to delete " + clickedItem + " ?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
             }
         });
 

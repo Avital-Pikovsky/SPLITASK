@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import Adapters.JoinedListAdapter;
 import Adapters.ListAdapter;
 import Adapters.UserProfile;
 import Adapters.pendingInvite;
@@ -90,14 +91,28 @@ public class Invite_Search extends AppCompatActivity {
                                                 String ID = getIntent().getExtras().getString("ID");
                                                 pendingInvite pinv = new pendingInvite(listName, owner, ID);
                                                 DataSnapshot invites = allDataSnapshot.child(user.getKey()).child("Pending invitation");
-                                                Boolean found = false;
+                                                DataSnapshot joined = allDataSnapshot.child(user.getKey()).child("Joined lists");
+
+                                                Boolean foundPinv = false;
+                                                Boolean foundJoind = false;
                                                 for (DataSnapshot inv : invites.getChildren()) {
                                                     pendingInvite p = inv.getValue(pendingInvite.class);
                                                     if (p.getListId().equals(pinv.getListId())) {
-                                                        found = true;
+                                                        foundPinv = true;
+                                                        Toast.makeText(Invite_Search.this, "You have already invited this user!", Toast.LENGTH_LONG).show();
+                                                        
                                                     }
                                                 }
-                                                if (!found)
+                                                for (DataSnapshot join : joined.getChildren()) {
+                                                    JoinedListAdapter j = join.getValue(JoinedListAdapter.class);
+                                                    if (j.getId().equals(pinv.getListId())) {
+                                                        foundJoind = true;
+                                                        Toast.makeText(Invite_Search.this, "This user is already enter this list!", Toast.LENGTH_LONG).show();
+
+
+                                                    }
+                                                }
+                                                if (!foundPinv && (!foundJoind))
                                                     temp.setValue(pinv);
                                             }
                                         }
@@ -156,7 +171,7 @@ public class Invite_Search extends AppCompatActivity {
                 for (DataSnapshot user : allDataSnapshot.getChildren()) {
                     DataSnapshot details = user.child("User details");
                     UserProfile currentUserProfile = details.getValue(UserProfile.class);
-                    if(currentUserProfile.getIsAdmin().equals("false")) {
+                    if (currentUserProfile.getIsAdmin().equals("false")) {
                         listOfUsers.add(currentUserProfile.getUserName());
                     }
                     adapter.notifyDataSetChanged();

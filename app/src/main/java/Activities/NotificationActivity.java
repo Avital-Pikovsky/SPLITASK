@@ -71,12 +71,14 @@ public class NotificationActivity extends AppCompatActivity {
                                 JoinedListAdapter j = new JoinedListAdapter(listID);
                                 pushedList.setValue(j);
 
-
+                                inviteList.remove(clickedItem);
+                                arrayAdapter.notifyDataSetChanged();
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
 
-
+                                inviteList.remove(clickedItem);
+                                arrayAdapter.notifyDataSetChanged();
                                 break;
                         }
                     }
@@ -108,6 +110,7 @@ public class NotificationActivity extends AppCompatActivity {
 
                     }
                 });
+
             }
 
         });

@@ -15,6 +15,11 @@ package="Activities">
     <activity
         android:name="Activities.UpdatePassword"
         android:parentActivityName=".LoggedInProfile"></activity>
+
+    <activity
+        android:name="Activities.EditListByManager"
+        android:parentActivityName=".ClickedListManager" />
+
     <activity
         android:name="Activities.UpdateProfile"
         android:parentActivityName=".LoggedInProfile" />
@@ -55,7 +60,8 @@ package="Activities">
         android:name="Activities.Invite_Search"
         android:parentActivityName=".LoggedInProfile" />
 
-    <activity android:name="Activities.NotificationActivity"
+    <activity
+        android:name="Activities.NotificationActivity"
         android:parentActivityName=".LoggedInProfile" />
 
 
