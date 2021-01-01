@@ -13,8 +13,8 @@
         android:layout_height="200dp"
         android:padding="10dp"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="49dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="139dp">
 
         <TextView
             android:id="@+id/heading"

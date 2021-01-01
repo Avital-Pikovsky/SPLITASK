@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +35,7 @@ import Adapters.UserProfile;
 public class LoggedInProfile extends AppCompatActivity {
 
     private TextView myProfile, myHistory, lists, contactUs, signOut;
+    private static Boolean flag = false;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth firebaseAuth;
     private final DatabaseReference allData = firebaseDatabase.getReference();
@@ -62,11 +64,13 @@ public class LoggedInProfile extends AppCompatActivity {
                 }
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoggedInProfile.this);
 
-                if(counter!= 0)
-                    builder.setMessage("Hello " + myName + "!\nYou have "+counter+" new invitations ").create().show();
-                else
-                    builder.setMessage("Hello " + myName + "!\nwe missed you :)").create().show();
-
+                if(!flag) {
+                    flag = true;
+                    if (counter != 0)
+                        builder.setMessage("Hello " + myName + "!\nYou have " + counter + " new invitations ").create().show();
+                    else
+                        builder.setMessage("Hello " + myName + "!\nwe missed you :)").create().show();
+                }
 
             }
 

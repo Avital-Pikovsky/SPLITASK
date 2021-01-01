@@ -7,21 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".SelectUserDetailsActivity"
     android:background="@drawable/gradient_background">
+  <include
+      layout="@layout/app_bar"
+      android:id="@+id/app_bar">
+  </include>
 
   <Button
       android:id="@+id/userDetailsBtn"
       android:layout_width="228dp"
       android:layout_height="86dp"
-      android:text="User Details"
       android:background="#9F4F89B8"
-      android:textSize="28dp"
       android:fontFamily="casual"
+      android:text="User Details"
+      android:textSize="28dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.497"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.257" />
+      app:layout_constraintVertical_bias="0.173" />
 
   <Button
       android:id="@+id/userListsBtn"
@@ -42,14 +46,42 @@
       android:id="@+id/friendsListsBtn"
       android:layout_width="324dp"
       android:layout_height="79dp"
-      android:text="User Friends Lists"
       android:background="#9F4F89B8"
       android:fontFamily="casual"
+      android:text="User Friends Lists"
       android:textSize="28dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.494"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/userListsBtn"
-      app:layout_constraintVertical_bias="0.221" />
+      app:layout_constraintVertical_bias="0.14" />
+
+  <CheckBox
+      android:id="@+id/makeAdmin"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="casual"
+      android:text="Admin"
+      android:textSize="28sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/friendsListsBtn"
+      app:layout_constraintVertical_bias="0.292" />
+
+  <Button
+      android:id="@+id/deleteUser"
+      android:layout_width="242dp"
+      android:layout_height="78dp"
+      android:background="#9F4F89B8"
+      android:fontFamily="casual"
+      android:text="Delete User"
+      android:textSize="28sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/makeAdmin" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -156,7 +156,9 @@ public class Invite_Search extends AppCompatActivity {
                 for (DataSnapshot user : allDataSnapshot.getChildren()) {
                     DataSnapshot details = user.child("User details");
                     UserProfile currentUserProfile = details.getValue(UserProfile.class);
-                    listOfUsers.add(currentUserProfile.getUserName());
+                    if(currentUserProfile.getIsAdmin().equals("false")) {
+                        listOfUsers.add(currentUserProfile.getUserName());
+                    }
                     adapter.notifyDataSetChanged();
 
                 }

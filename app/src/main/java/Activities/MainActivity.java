@@ -42,11 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         setupUI();
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         allData = firebaseDatabase.getReference();
@@ -90,35 +91,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private String Admin() {
+    private String Admin(String UserEmail) {
 
         Boolean checkBox = check.isChecked();
-        allData.addValueEventListener(new ValueEventListener() {
+        allData.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot allDataSnapshot) {
                 for (DataSnapshot user : allDataSnapshot.getChildren()) {
                     DataSnapshot details = user.child("User details");
                     UserProfile currentUserProfile = details.getValue(UserProfile.class);
-                    if (currentUserProfile.getIsAdmin() != null) {
+                    if(currentUserProfile.userEmail.equals(UserEmail)) {
                         if (currentUserProfile.getIsAdmin().equals("true")) {
                             if (checkBox) {
                                 status = "trueAdmin";
-                                } else {
-                                    status = "stupidAdmin";
-                                }
                             } else {
-                                if (checkBox) {
-                                    status = "stupidUser";
-                                } else {
-                                    status = "user";
-                                }
+                                status = "stupidAdmin";
                             }
                         } else {
-                            Toast.makeText(MainActivity.this, "You are sjhdjasdhjasdhjasdhjas admin", Toast.LENGTH_SHORT).show();
-
+                            if (checkBox) {
+                                status = "stupidUser";
+                            } else {
+                                status = "user";
+                            }
                         }
                     }
                 }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -150,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
 
-                        String answer = Admin();
+                        String answer = Admin(userEmail);
 
                         if (answer.equals("user")) {
                             startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
