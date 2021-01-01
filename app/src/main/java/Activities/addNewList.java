@@ -33,7 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import Adapters.ListAdapter;
 
 
-public class addNewList extends Activity implements OnClickListener,
+public class addNewList extends AppCompatActivity implements OnClickListener,
         OnItemLongClickListener {
 
     private ArrayList<String> datasource;
@@ -53,6 +53,11 @@ public class addNewList extends Activity implements OnClickListener,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_list);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         setupUI();
 
@@ -93,6 +98,7 @@ public class addNewList extends Activity implements OnClickListener,
 
         });
     }
+
 
 
     //this functions adds the new added list to the database,
@@ -170,6 +176,41 @@ public class addNewList extends Activity implements OnClickListener,
             view.setText(datasource.get(position));
             return view;
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.manu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.profile:
+                startActivity(new Intent(this, myProfile.class));
+                break;
+            case R.id.my_lists:
+                startActivity(new Intent(this, CreatedLists.class));
+                break;
+            case R.id.friends_lists:
+                startActivity(new Intent(this, JoinedLists.class));
+                break;
+            case R.id.contact:
+                startActivity(new Intent(this, contactUs.class));
+                break;
+            case R.id.out:
+                firebaseAuth.signOut();
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.notification:
+                startActivity(new Intent(this, NotificationActivity.class));
+                break;
+            default:
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

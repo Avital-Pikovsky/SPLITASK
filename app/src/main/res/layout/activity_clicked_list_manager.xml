@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".ClickedListManager"
     android:background="@drawable/gradient_background">
+  <include
+      layout="@layout/app_bar"
+      android:id="@+id/app_bar">
+  </include>
 
 
   <LinearLayout

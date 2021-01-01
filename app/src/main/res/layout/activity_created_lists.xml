@@ -48,7 +48,7 @@
         android:layout_width="112dp"
         android:layout_height="41dp"
         android:fontFamily="casual"
-        android:text="Add List"
+        android:text="Add New List"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
