@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -94,12 +95,11 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
         JoinedListsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot1) {
-                friendListHistory.clear();
                 for (DataSnapshot uniqueUserSnapshot1 : dataSnapshot1.getChildren()) {
                     JoinedListAdapter JLA = uniqueUserSnapshot1.getValue(JoinedListAdapter.class);
                     arrayAdapter.notifyDataSetChanged();
 
-                    databaseReference.addValueEventListener(new ValueEventListener() {
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
                             for (DataSnapshot uniqueUserSnapshot2 : dataSnapshot2.getChildren()) {
@@ -107,12 +107,14 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
                                     ListAdapter LA = uniqueUserSnapshot3.getValue(ListAdapter.class);
 
                                     if (JLA.getId().equals(LA.getId() + "")) {
+
                                         friendListHistory.add(LA.getName() + " ID:" + LA.getId());
                                         arrayAdapter.notifyDataSetChanged();
                                     }
 
                                 }
                             }
+
                             if(friendListHistory.isEmpty()){
                                 friendListHistory.add("No lists for now");
                                 arrayAdapter.notifyDataSetChanged();
@@ -127,6 +129,8 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
                         }
                     });
                 }
+
+
             }
 
             @Override

@@ -123,9 +123,12 @@ public class NotificationActivity extends AppCompatActivity {
                 inviteList.clear();
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                     pendingInvite pen = uniqueUserSnapshot.getValue(pendingInvite.class);
-                    inviteList.add("List: " + pen.getListName() + " Creator: " + pen.getCreatorName() + " ID: " + pen.getListId());
+                    inviteList.add("List: " + pen.getListName() + " By: " + pen.getCreatorName() + " ID: " + pen.getListId());
                     arrayAdapter.notifyDataSetChanged();
                 }
+                if (inviteList.isEmpty())
+                    inviteList.add("No invitations for now");
+                    arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -134,6 +137,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

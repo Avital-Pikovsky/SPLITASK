@@ -14,14 +14,14 @@
 
   <LinearLayout
       android:id="@+id/linearLayout"
-      android:layout_width="339dp"
-      android:layout_height="449dp"
+      android:layout_width="273dp"
+      android:layout_height="376dp"
       android:orientation="vertical"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.698">
+      app:layout_constraintVertical_bias="0.901">
 
     <ListView
         android:id="@+id/listClicked"
@@ -30,7 +30,7 @@
 
   </LinearLayout>
 
-  <TextView
+  <EditText
       android:id="@+id/listName"
       android:layout_width="187dp"
       android:layout_height="53dp"
@@ -42,5 +42,17 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.169" />
+
+  <Button
+      android:id="@+id/changeName"
+      android:layout_width="124dp"
+      android:layout_height="38dp"
+      android:text="Chnage"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/app_bar"
+      app:layout_constraintVertical_bias="0.259" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

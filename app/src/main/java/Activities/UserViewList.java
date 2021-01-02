@@ -11,8 +11,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,12 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import Adapters.ListAdapter;
-import Adapters.pendingInvite;
 
 public class UserViewList extends AppCompatActivity {
 
-    private TextView listName;
-    private String name;
+    private EditText listName;
+    private Button Change;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -44,8 +44,8 @@ public class UserViewList extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        listName = (TextView) findViewById(R.id.listName);
-
+        listName = (EditText) findViewById(R.id.listName);
+        Change = (Button) findViewById(R.id.changeName);
 
         String key = getIntent().getExtras().getString("listKey");
         key.replaceAll("\\s", "");
@@ -55,6 +55,37 @@ public class UserViewList extends AppCompatActivity {
         ArrayList<String> clickedList = new ArrayList<>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clickedList);
         list.setAdapter(arrayAdapter);
+
+
+        Change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = listName.getText().toString();
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot uniqueUserSnapshot : snapshot.getChildren()) {
+                            DataSnapshot lists = uniqueUserSnapshot.child("Created lists");
+                            for (DataSnapshot oneList : lists.getChildren()) {
+                                ListAdapter l = oneList.getValue(ListAdapter.class);
+                                if (l.getId() == keyNumber) {
+                                    l.setName(name);
+                                    DatabaseReference ref = databaseReference.child(uniqueUserSnapshot.getKey()).child("Created lists").child(oneList.getKey());
+                                    ref.setValue(l);
+                                }
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -65,7 +96,7 @@ public class UserViewList extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                if(clickedList.size() == 1) {
+                                if (clickedList.size() == 1) {
                                     clickedList.add("The list is empty");
                                 }
                                 clickedList.remove(clickedItem);
@@ -118,7 +149,6 @@ public class UserViewList extends AppCompatActivity {
                         ListAdapter LA = user_list.getValue(ListAdapter.class);
                         if (LA.getId() == keyNumber) {
                             listName.setText(LA.getName());
-                            name = listName.getText().toString();
                             for (int j = 0; j < LA.getList().size(); j++) {
                                 clickedList.add((LA.getList().get(j)));
                             }

@@ -2,9 +2,11 @@ package Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +37,7 @@ public class ClickedListManager extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid()).child("Created lists");
+    private final DatabaseReference userD = firebaseDatabase.getReference(firebaseAuth.getUid()).child("User details");
 
     private TextView listName;
     private Button invite, Edit;
@@ -65,8 +69,65 @@ public class ClickedListManager extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) list.getItemAtPosition(position);
+                if (clickedItem.contains("√ ")) {
+                    Toast.makeText(ClickedListManager.this, "Item is already checked", Toast.LENGTH_SHORT).show();
 
+                } else {
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    userD.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            UserProfile up = snapshot.getValue(UserProfile.class);
+                                            String name = up.getUserName();
+                                            clickedList.set(clickedList.indexOf(clickedItem), "√ " + clickedItem + " - " + name);
+                                            arrayAdapter.notifyDataSetChanged();
+                                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    for (DataSnapshot list : snapshot.getChildren()) {
+                                                        ListAdapter LA = list.getValue(ListAdapter.class);
+
+                                                        if (keyNumber == LA.getId()) {
+                                                            LA.setList(clickedList);
+                                                            DatabaseReference item = databaseReference.child(list.getKey());
+                                                            item.setValue(LA);
+
+                                                        }
+
+                                                    }
+                                                }
+
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+                                    break;
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ClickedListManager.this);
+                    builder.setMessage("Do you want to choose " + clickedItem + "?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+
+                }
             }
+
         });
 
         //Looking for a match up between a list and the key.

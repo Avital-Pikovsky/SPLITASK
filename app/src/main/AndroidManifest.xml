@@ -18,6 +18,7 @@ package="Activities">
 
     <activity
         android:name="Activities.EditListByManager"
+        android:windowSoftInputMode="adjustPan"
         android:parentActivityName=".ClickedListManager" />
 
     <activity
@@ -31,9 +32,11 @@ package="Activities">
         android:parentActivityName=".LoggedInProfile" />
     <activity
         android:name="Activities.addNewList"
+        android:windowSoftInputMode="adjustPan"
         android:parentActivityName=".LoggedInProfile" />
     <activity
         android:name="Activities.JoinedLists"
+        android:windowSoftInputMode="adjustPan"
         android:parentActivityName=".LoggedInProfile" />
     <activity
         android:name="Activities.contactUs"
@@ -85,6 +88,7 @@ package="Activities">
         android:parentActivityName=".AdminActivity" />
 
     <activity android:name="Activities.UserViewList"
+        android:windowSoftInputMode="adjustPan"
     android:parentActivityName=".AdminActivity" />
 
 
