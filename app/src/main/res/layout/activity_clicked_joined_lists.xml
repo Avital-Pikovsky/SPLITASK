@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".clickedJoinedList"
     android:background="@drawable/gradient_background">
-
+  <include
+      layout="@layout/app_bar"
+      android:id="@+id/app_bar">
+  </include>
 
   <LinearLayout
       android:id="@+id/linearLayout"
@@ -18,7 +21,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.538">
+      app:layout_constraintVertical_bias="0.665">
 
     <ListView
         android:id="@+id/listClicked"
@@ -31,23 +34,13 @@
       android:id="@+id/freindListName"
       android:layout_width="187dp"
       android:layout_height="53dp"
-      android:fontFamily="sans-serif-black"
+      android:fontFamily="casual"
       android:textSize="24sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.459"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.089" />
-
-  <Button
-      android:id="@+id/save"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Button"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+      app:layout_constraintVertical_bias="0.143" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,17 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -37,6 +43,10 @@ public class clickedJoinedList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clicked_joined_lists);
+        androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
         setupUI();
 
         String key = getIntent().getExtras().getString("listKey");
@@ -62,7 +72,7 @@ public class clickedJoinedList extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         UserProfile up = snapshot.getValue(UserProfile.class);
                                         String name = up.getUserName();
-                                        clickedList.set(clickedList.indexOf(clickedItem), clickedItem+" By: "+name);
+                                        clickedList.set(clickedList.indexOf(clickedItem), "√ "+clickedItem+" - "+name);
                                         arrayAdapter.notifyDataSetChanged();
                                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
@@ -106,7 +116,7 @@ public class clickedJoinedList extends AppCompatActivity {
             }
         });
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot allDB) {
                 for (DataSnapshot user : allDB.getChildren()) {
@@ -131,6 +141,42 @@ public class clickedJoinedList extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.manu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.profile:
+                startActivity(new Intent(this, myProfile.class));
+                break;
+            case R.id.my_lists:
+                startActivity(new Intent(this, CreatedLists.class));
+                break;
+            case R.id.friends_lists:
+                startActivity(new Intent(this, JoinedLists.class));
+                break;
+            case R.id.contact:
+                startActivity(new Intent(this, contactUs.class));
+                break;
+            case R.id.out:
+                firebaseAuth.signOut();
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.notification:
+                startActivity(new Intent(this, NotificationActivity.class));
+                break;
+            default:
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupUI() {

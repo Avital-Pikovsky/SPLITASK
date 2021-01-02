@@ -91,7 +91,7 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
 
 
         //looping on ALL the database looking for list that the user is part of.
-        JoinedListsRef.addValueEventListener(new ValueEventListener() {
+        JoinedListsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot1) {
                 friendListHistory.clear();
