@@ -83,6 +83,11 @@ public class CreatedLists extends AppCompatActivity {
                     listHistory.add(LA.getName() + " ID:" + LA.getId());
                     arrayAdapter.notifyDataSetChanged();
                 }
+                if(listHistory.isEmpty()){
+                    listHistory.add("No lists for now");
+                    arrayAdapter.notifyDataSetChanged();
+
+                }
             }
 
             @Override

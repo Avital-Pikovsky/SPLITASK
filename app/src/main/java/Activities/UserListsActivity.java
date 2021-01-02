@@ -66,6 +66,11 @@ public class UserListsActivity extends AppCompatActivity {
                         }
                     }
                 }
+                if(listHistory.isEmpty()){
+                    listHistory.add("No lists for now");
+                    arrayAdapter.notifyDataSetChanged();
+
+                }
             }
 
             @Override

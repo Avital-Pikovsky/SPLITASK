@@ -65,6 +65,9 @@ public class UserViewList extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
+                                if(clickedList.size() == 1) {
+                                    clickedList.add("The list is empty");
+                                }
                                 clickedList.remove(clickedItem);
                                 arrayAdapter.notifyDataSetChanged();
 

@@ -109,11 +109,17 @@ public class JoinedLists extends AppCompatActivity implements View.OnClickListen
                                     if (JLA.getId().equals(LA.getId() + "")) {
                                         friendListHistory.add(LA.getName() + " ID:" + LA.getId());
                                         arrayAdapter.notifyDataSetChanged();
-
                                     }
+
                                 }
                             }
+                            if(friendListHistory.isEmpty()){
+                                friendListHistory.add("No lists for now");
+                                arrayAdapter.notifyDataSetChanged();
+
+                            }
                         }
+
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {

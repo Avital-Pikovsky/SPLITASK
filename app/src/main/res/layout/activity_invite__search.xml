@@ -26,6 +26,7 @@
         android:divider="@color/black"
         android:dividerHeight="2dp" />
 
+
     <SearchView
         android:id="@+id/searchView"
         android:fontFamily="casual"
@@ -35,5 +36,6 @@
         android:layout_marginTop="59dp"
         android:iconifiedByDefault="false"
         android:queryHint="Search Here" />
+
 
 </RelativeLayout>

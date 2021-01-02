@@ -1,10 +1,13 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -27,6 +30,7 @@ public class clickedJoinedList extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference databaseReference = firebaseDatabase.getReference();
+    private final DatabaseReference createdList = firebaseDatabase.getReference().child(firebaseAuth.getUid()).child("User details");
     private TextView JoinedListName;
 
     @Override
@@ -48,6 +52,56 @@ public class clickedJoinedList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) list.getItemAtPosition(position);
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                createdList.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        UserProfile up = snapshot.getValue(UserProfile.class);
+                                        String name = up.getUserName();
+                                        clickedList.set(clickedList.indexOf(clickedItem), clickedItem+" By: "+name);
+                                        arrayAdapter.notifyDataSetChanged();
+                                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                for (DataSnapshot user : snapshot.getChildren()) {
+                                                    for (DataSnapshot userLists : user.child("Created lists").getChildren()) {
+                                                        ListAdapter LA = userLists.getValue(ListAdapter.class);
+
+                                                        if (keyNumber == LA.getId()) {
+                                                            LA.setList(clickedList);
+                                                            DatabaseReference item = databaseReference.child(user.getKey()).child("Created lists").child(userLists.getKey());
+                                                            item.setValue(LA);
+
+                                                        }
+
+                                                    }
+                                                }                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(clickedJoinedList.this);
+                builder.setMessage("Do you want to choose " + clickedItem + "?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
 
             }
         });

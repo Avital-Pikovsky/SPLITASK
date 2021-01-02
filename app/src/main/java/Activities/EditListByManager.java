@@ -137,11 +137,17 @@ public class EditListByManager extends AppCompatActivity implements View.OnClick
                 String text = ((EditText) dialog.findViewById(R.id.edit_box))
                         .getText().toString();
                 if (null != text && 0 != text.compareTo("")) {
-                    clickedList.add(text);
-                    dialog.dismiss();
-                    adapter.notifyDataSetChanged();
+                    if (clickedList.size() == 1 && clickedList.get(0).equals("The list is empty")) {
+                        clickedList.add(text);
+                        clickedList.remove("The list is empty");
+                    }
+                    else{
+                        clickedList.add(text);
+                    }
+                        dialog.dismiss();
+                        adapter.notifyDataSetChanged();
+                        updateListDB();
 
-                    updateListDB();
                 }
                 break;
         }
@@ -172,6 +178,9 @@ public class EditListByManager extends AppCompatActivity implements View.OnClick
     @Override
     public boolean onItemLongClick(AdapterView<?> listView, View view,
                                    int position, long column) {
+        if(clickedList.size() == 1) {
+            clickedList.add("The list is empty");
+        }
         clickedList.remove(position);
         adapter.notifyDataSetChanged();
 

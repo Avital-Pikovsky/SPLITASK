@@ -63,8 +63,7 @@ public class Invite_Search extends AppCompatActivity {
 
         listOfUsers = new ArrayList<>();
 
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfUsers);
+        adapter = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, listOfUsers);
         listView.setAdapter(adapter);
 
 
