@@ -123,7 +123,7 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     private void getUserinfo() {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 

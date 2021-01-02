@@ -89,7 +89,7 @@ public class AdminActivity extends AppCompatActivity {
         });
 
         //fill the list from the database
-        allData.addValueEventListener(new ValueEventListener() {
+        allData.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot allDataSnapshot) {
                 for (DataSnapshot user : allDataSnapshot.getChildren()) {

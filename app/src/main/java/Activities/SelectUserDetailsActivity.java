@@ -1,8 +1,10 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +38,11 @@ public class SelectUserDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_user_details);
+
+        androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         setupUI();
 
@@ -171,6 +178,9 @@ public class SelectUserDetailsActivity extends AppCompatActivity {
 
         });
     }
+
+
+
     private void setupUI(){
         userDetails_b = (Button) findViewById(R.id.userDetailsBtn);
         userLists_b = (Button) findViewById(R.id.userListsBtn);

@@ -1,8 +1,10 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import Adapters.ListAdapter;
+import Adapters.pendingInvite;
 
 public class UserViewList extends AppCompatActivity {
 
@@ -35,6 +38,11 @@ public class UserViewList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_view_list);
+
+        androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         listName = (TextView) findViewById(R.id.listName);
 
@@ -58,6 +66,8 @@ public class UserViewList extends AppCompatActivity {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 clickedList.remove(clickedItem);
+                                arrayAdapter.notifyDataSetChanged();
+
 
                                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -92,10 +102,11 @@ public class UserViewList extends AppCompatActivity {
                 };
                 AlertDialog.Builder builder = new AlertDialog.Builder(UserViewList.this);
                 builder.setMessage("Are you sure you want to delete " + clickedItem + " ?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+
             }
         });
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {

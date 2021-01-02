@@ -47,29 +47,35 @@
 
   <Button
       android:id="@+id/invites"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="116dp"
+      android:layout_height="66dp"
       android:background="#9F4F89B8"
       android:fontFamily="casual"
       android:text="invite"
+      android:textColor="@color/white"
+      android:textSize="28sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintHorizontal_bias="0.107"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.947" />
+      app:layout_constraintVertical_bias="0.903" />
 
   <Button
       android:id="@+id/edit"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="110dp"
+      android:layout_height="65dp"
+      android:background="#9F4F89B8"
+      android:fontFamily="casual"
       android:text="Edit "
+      android:textColor="@color/white"
+      android:textSize="28sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintHorizontal_bias="0.883"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.77" />
+      app:layout_constraintVertical_bias="0.903" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

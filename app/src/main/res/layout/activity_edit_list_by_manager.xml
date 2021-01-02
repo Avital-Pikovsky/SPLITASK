@@ -15,18 +15,19 @@
 
   <LinearLayout
       android:id="@+id/linearLayout"
-      android:layout_width="342dp"
-      android:layout_height="311dp"
+      android:layout_width="389dp"
+      android:layout_height="368dp"
       android:orientation="vertical"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.492"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.469">
+      app:layout_constraintVertical_bias="0.633">
 
     <ListView
+        android:fontFamily="casual"
         android:id="@+id/listClicked"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -36,8 +37,9 @@
       android:id="@+id/freindListName"
       android:layout_width="187dp"
       android:layout_height="53dp"
-      android:fontFamily="sans-serif-black"
+      android:fontFamily="casual"
       android:textSize="24sp"
+      android:gravity="center"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.459"
@@ -47,21 +49,27 @@
 
   <Button
       android:id="@+id/edit"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="165dp"
+      android:layout_height="67dp"
+      android:background="#9F4F89B8"
+      android:fontFamily="casual"
       android:text="Add item"
+      android:textSize="28sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.77" />
+      app:layout_constraintVertical_bias="0.937" />
 
   <Button
       android:id="@+id/changeN"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="172dp"
+      android:layout_height="36dp"
+      android:background="#9F4F89B8"
+      android:fontFamily="casual"
       android:text="Change Name"
+      android:textSize="18sp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.468"

@@ -72,19 +72,21 @@ package="Activities">
 
     <activity
         android:name="Activities.UserDetailsActivity"
-        android:parentActivityName=".SelectUserDetailsActivity" />
+        android:parentActivityName=".AdminActivity" />
 
 
     <activity
         android:name="Activities.UserListsActivity"
-        android:parentActivityName=".SelectUserDetailsActivity" />
+        android:parentActivityName=".AdminActivity" />
 
 
     <activity
         android:name="Activities.UserJoinedListsActivity"
-        android:parentActivityName=".SelectUserDetailsActivity" />
+        android:parentActivityName=".AdminActivity" />
 
-    <activity android:name="Activities.UserViewList"></activity>
+    <activity android:name="Activities.UserViewList"
+    android:parentActivityName=".AdminActivity" />
+
 
 
     <activity android:name="Activities.MainActivity">

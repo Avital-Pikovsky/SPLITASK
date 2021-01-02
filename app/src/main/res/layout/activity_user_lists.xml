@@ -35,7 +35,7 @@
       android:layout_width="269dp"
       android:layout_height="66dp"
       android:fontFamily="casual"
-      android:text="Lists History"
+      android:text="Lists History:"
       android:textAlignment="center"
       android:textSize="28sp"
       app:layout_constraintBottom_toBottomOf="parent"

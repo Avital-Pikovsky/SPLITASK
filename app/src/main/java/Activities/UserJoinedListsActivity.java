@@ -1,7 +1,9 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +39,11 @@ public class UserJoinedListsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_joined_lists);
 
+        androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
         String clickedUser = getIntent().getExtras().getString("userName");
 
 
@@ -47,7 +54,7 @@ public class UserJoinedListsActivity extends AppCompatActivity {
         list.setAdapter(arrayAdapter);
 
         //fill the list from the database, with id.
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot allDB) {
                 for (DataSnapshot user : allDB.getChildren()) {
@@ -60,7 +67,7 @@ public class UserJoinedListsActivity extends AppCompatActivity {
                             JoinedListAdapter JLA = list.getValue(JoinedListAdapter.class);
                             arrayAdapter.notifyDataSetChanged();
 
-                            databaseReference2.addValueEventListener(new ValueEventListener() {
+                            databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
                                     for (DataSnapshot uniqueUserSnapshot2 : dataSnapshot2.getChildren()) {
