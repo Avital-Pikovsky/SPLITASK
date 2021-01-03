@@ -31,7 +31,7 @@ import Adapters.UserProfile;
 
 public class MainActivity extends AppCompatActivity {
     private EditText userEmail, userPassword;
-    private Button signInButton, main;
+    private Button signInButton;
     private TextView userSignUp, forgotPassword;
     private CheckBox check;
     private String status = "";
@@ -66,12 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 signIn(userEmail.getText().toString(), userPassword.getText().toString());
             }
         });
-        main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-            }
-        });
+
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         userSignUp = (TextView) findViewById(R.id.register);
         forgotPassword = (TextView) findViewById(R.id.ForgotPass);
         check = (CheckBox) findViewById(R.id.checkBox2);
-        main = (Button) findViewById(R.id.button2);
 
     }
 
