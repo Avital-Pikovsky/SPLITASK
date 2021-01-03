@@ -1,6 +1,14 @@
 
 ![logo_size-removebg-preview](https://user-images.githubusercontent.com/57085913/98835196-c964be00-2448-11eb-9307-2b7f632c979c.png)
 
+##About The Application:
+
+The main essence of the app is the creation of collaborative lists.
+Any user can create a list, order items, and make friends take part in this list.
+
+##Presentation:
+
+[Google Slides](https://docs.google.com/presentation/d/1lDWVJpqH5pZ63cGsaRdLLoj93Z5lJBd54WriAhQrHm0/edit#slide=id.gb32225c50c_2_1 "Google Slides")
 
 ## Diagrams:
 
