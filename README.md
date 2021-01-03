@@ -12,7 +12,7 @@ Any user can create a list, order items, and make friends take part in this list
 [Google Slides](https://docs.google.com/presentation/d/1lDWVJpqH5pZ63cGsaRdLLoj93Z5lJBd54WriAhQrHm0/edit#slide=id.gb32225c50c_2_1 "Google Slides")
 
 ## Photos:
-
+![image](https://user-images.githubusercontent.com/57085913/103488872-fdd97280-4e18-11eb-94a4-2a0a50c273da.png)
 
 ![image](https://user-images.githubusercontent.com/57085913/103486115-fa87bc00-4e03-11eb-9032-d29e1be1120e.png)
 
