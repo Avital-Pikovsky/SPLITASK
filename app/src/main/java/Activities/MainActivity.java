@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Button signInButton, main;
     private TextView userSignUp, forgotPassword;
     private CheckBox check;
-    private String status = "User";
+    private String status = "";
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -91,42 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private String Admin(String UserEmail) {
-
-        Boolean checkBox = check.isChecked();
-        allData.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot allDataSnapshot) {
-                for (DataSnapshot user : allDataSnapshot.getChildren()) {
-                    DataSnapshot details = user.child("User details");
-                    UserProfile currentUserProfile = details.getValue(UserProfile.class);
-                    if(currentUserProfile.userEmail.equals(UserEmail)) {
-                        if (currentUserProfile.getIsAdmin().equals("true")) {
-                            if (checkBox) {
-                                status = "trueAdmin";
-                            } else {
-                                status = "stupidAdmin";
-                            }
-                        } else {
-                            if (checkBox) {
-                                status = "stupidUser";
-                            } else {
-                                status = "user";
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return status;
-    }
-
     private void setupUI(){
         userEmail = (EditText) findViewById(R.id.mainUserEmail);
         userPassword = (EditText) findViewById(R.id.mainUserPassword);
@@ -148,26 +112,60 @@ public class MainActivity extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
 
-                        String answer = Admin(userEmail);
+                        Boolean checkBox = check.isChecked();
+                        allData.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot allDataSnapshot) {
 
-                        if (answer.equals("user")) {
-                            startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
-                            Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+                                for (DataSnapshot user : allDataSnapshot.getChildren()) {
 
-                        }
-                        if (answer.equals("trueAdmin")) {
-                            startActivity(new Intent(MainActivity.this, AdminActivity.class));
-                            Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+                                    DataSnapshot details = user.child("User details");
+                                    UserProfile currentUserProfile = details.getValue(UserProfile.class);
 
-                        }
-                        if (answer.equals("stupidAdmin")) {
-                            Toast.makeText(MainActivity.this, "You are admin", Toast.LENGTH_SHORT).show();
+                                    if(currentUserProfile.userEmail.equals(userEmail)) {
+                                        if (currentUserProfile.getIsAdmin().equals("true")) {
+                                            if (checkBox) {
+                                                status = "trueAdmin";
+                                            } else {
+                                                status = "stupidAdmin";
+                                            }
+                                        } else {
+                                            if (checkBox) {
+                                                status = "stupidUser";
+                                            } else {
+                                                status = "user";
+                                            }
+                                        }
+                                    }
+                                }
 
-                        }
-                        if (answer.equals("stupidUser")) {
-                            Toast.makeText(MainActivity.this, "You need to unCheck admin", Toast.LENGTH_SHORT).show();
 
-                        }
+                                if (status.equals("user")) {
+                                    startActivity(new Intent(MainActivity.this, LoggedInProfile.class));
+                                    Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
+                                }
+                                if (status.equals("trueAdmin")) {
+                                    startActivity(new Intent(MainActivity.this, AdminActivity.class));
+                                    Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
+                                }
+                                if (status.equals("stupidAdmin")) {
+                                    Toast.makeText(MainActivity.this, "You are admin", Toast.LENGTH_SHORT).show();
+
+                                }
+                                if (status.equals("stupidUser")) {
+                                    Toast.makeText(MainActivity.this, "You need to unCheck admin", Toast.LENGTH_SHORT).show();
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
 
                     } else {
                         Toast.makeText(MainActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
@@ -178,7 +176,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
